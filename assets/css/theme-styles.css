@@ -1,0 +1,439 @@
+/*
+ * TripAzai Preview Mockup CSS
+ */
+
+:root {
+    --primary: #0077b6;
+    --primary-hover: #0096c7;
+    --secondary: #d97706;
+    --dark: #0f172a;
+    --light: #f8fafc;
+}
+
+/* Glassmorphism Styles */
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.15);
+}
+
+/* Typography - Lato, Montserrat, Open Sans Combination */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+input, select, textarea, button, .btn-premium, .pulse-call-btn, label, nav, .text-xs, .text-sm {
+    font-family: 'Lato', sans-serif;
+}
+
+/* Modal Popup Transition System */
+#booking-modal {
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#booking-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#booking-modal .modal-content {
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#booking-modal.active .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+/* Call Button Animation */
+@keyframes pulse-call {
+    0% {
+        box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(20, 184, 166, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(20, 184, 166, 0);
+    }
+}
+
+.pulse-call-btn {
+    animation: pulse-call 2s infinite;
+}
+
+/* Aspect ratio helper */
+.aspect-w-16 {
+    position: relative;
+    padding-bottom: 56.25%;
+}
+.aspect-w-16 img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+}
+
+/* Line clamp */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+/* Explicit Button Fallbacks to Guarantee Text Visibility */
+button:not(#prev-slide-btn):not(#next-slide-btn), 
+.btn-premium, 
+.pulse-call-btn,
+a.btn-premium, 
+a.pulse-call-btn,
+a[class*="bg-teal-"],
+button[class*="bg-teal-"],
+a[class*="bg-gradient-"],
+button[class*="bg-gradient-"] {
+    color: #ffffff !important;
+    background-color: var(--primary, #0077b6) !important;
+    border: none;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+button:not(#prev-slide-btn):not(#next-slide-btn):hover,
+.btn-premium:hover,
+.pulse-call-btn:hover,
+a.btn-premium:hover,
+a.pulse-call-btn:hover,
+a[class*="bg-teal-"]:hover,
+button[class*="bg-teal-"]:hover,
+a[class*="bg-gradient-"]:hover,
+button[class*="bg-gradient-"]:hover {
+    background-color: var(--primary-hover, #0096c7) !important;
+    color: #ffffff !important;
+    opacity: 0.95;
+}
+
+/* Explicit Form Input and Label Visibility Overrides */
+section form,
+#search-filter-form {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+}
+
+section form label,
+#search-filter-form label {
+    color: #475569 !important; /* Slate 600 */
+}
+
+section form input,
+section form select,
+section form option,
+#search-filter-form input,
+#search-filter-form select,
+#search-filter-form option,
+#rooms-guests-trigger,
+#rooms-guests-trigger span,
+#rooms-guests-popup,
+#rooms-guests-popup *,
+#location,
+#check_in,
+#check_out {
+    background-color: #ffffff !important;
+    color: #1e293b !important; /* Slate 800 */
+    border-color: #cbd5e1 !important; /* Slate 300 border */
+}
+
+#rooms-guests-trigger #rooms-guests-subdisplay {
+    color: #64748b !important; /* Slate 500 */
+}
+
+#rooms-guests-popup button {
+    color: #ffffff !important;
+}
+
+#rooms-guests-popup button#add-room-btn {
+    color: #2563eb !important; /* Blue 600 */
+    background-color: #ffffff !important;
+    border: 1px solid #2563eb !important;
+}
+
+#rooms-guests-popup button#add-room-btn:hover {
+    background-color: #eff6ff !important; /* Blue 50 */
+}
+
+#rooms-guests-popup button#done-guests-btn {
+    color: #0f172a !important; /* Slate 900 */
+    background-color: #eab308 !important; /* Yellow 500 */
+}
+
+/* Gallery slide transitions */
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gallery-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.slider-dot.active {
+    background-color: #ffffff;
+    transform: scale(1.2);
+}
+
+/* Custom Flatpickr Teal Styling Overrides for Premium Digital Feel */
+.flatpickr-calendar {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+.flatpickr-months {
+    background: #0077b6 !important;
+    color: #ffffff !important;
+    padding: 10px 0 !important;
+}
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    top: 10px !important;
+}
+.flatpickr-months .flatpickr-prev-month:hover,
+.flatpickr-months .flatpickr-next-month:hover {
+    color: #ccfbf1 !important;
+}
+.flatpickr-current-month {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    background: #0077b6 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border: none !important;
+    outline: none !important;
+}
+.flatpickr-current-month .numInputWrapper span.arrowUp:after {
+    border-bottom-color: #ffffff !important;
+}
+.flatpickr-current-month .numInputWrapper span.arrowDown:after {
+    border-top-color: #ffffff !important;
+}
+.flatpickr-weekdays {
+    background: #0077b6 !important;
+    padding: 2px 0 6px 0 !important;
+}
+span.flatpickr-weekday {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 600 !important;
+    background: #0077b6 !important;
+}
+.flatpickr-days {
+    padding: 8px !important;
+}
+.flatpickr-day {
+    border-radius: 8px !important;
+    color: #334155 !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+.flatpickr-day:hover {
+    background: #f1f5f9 !important;
+}
+.flatpickr-day.today {
+    border-color: #0077b6 !important;
+    color: #0077b6 !important;
+    font-weight: 700 !important;
+}
+.flatpickr-day.today:hover {
+    background: #0077b6 !important;
+    color: #ffffff !important;
+}
+.flatpickr-day.selected, 
+.flatpickr-day.startRange, 
+.flatpickr-day.endRange {
+    background: #0077b6 !important;
+    border-color: #0077b6 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+.flatpickr-day.inRange {
+    background: #ccfbf1 !important;
+    color: #0077b6 !important;
+    border-color: transparent !important;
+}
+.flatpickr-day.flatpickr-disabled, 
+.flatpickr-day.flatpickr-disabled:hover {
+    color: #cbd5e1 !important;
+    background: transparent !important;
+}
+
+/* Date Input Icon Positioning & Spacing Alignments */
+.date-input-wrapper {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+.date-input-wrapper i {
+    position: absolute !important;
+    right: 16px !important;
+    color: #94a3b8 !important; /* Slate 400 */
+    pointer-events: none !important;
+    font-size: 14px !important;
+    z-index: 10 !important;
+    display: block !important;
+}
+.date-input-wrapper input {
+    width: 100% !important;
+    padding-right: 42px !important; /* Spacing to prevent text overlapping the calendar icon */
+    padding-left: 16px !important;
+}
+
+/* Force Tailwind teal utility classes to map to Ocean Blue */
+.text-teal-600, 
+.text-teal-700, 
+.text-teal-800,
+.group-hover\:text-teal-600:hover, 
+.group:hover .group-hover\:text-teal-600 {
+    color: var(--primary, #0077b6) !important;
+}
+.bg-teal-50, 
+.bg-teal-100 {
+    background-color: #f0f9ff !important; /* Light sky blue backdrop */
+}
+.bg-teal-600, 
+.bg-teal-700, 
+.bg-teal-800,
+.hover\:bg-teal-700:hover,
+.hover\:bg-teal-800:hover {
+    background-color: var(--primary, #0077b6) !important;
+}
+.border-teal-100, 
+.border-teal-200 {
+    border-color: #bae6fd !important; /* Light sky blue border */
+}
+.focus\:ring-teal-500:focus {
+    --tw-ring-color: var(--primary, #0077b6) !important;
+}
+.bg-gradient-to-r.from-teal-600 {
+    --tw-gradient-from: #0077b6 !important;
+    --tw-gradient-to: #0096c7 !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+.bg-gradient-to-r.from-teal-500 {
+    --tw-gradient-from: #0096c7 !important;
+    --tw-gradient-to: #00b4d8 !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+/* Custom Font-Lato Utility */
+.font-lato {
+    font-family: 'Lato', sans-serif !important;
+}
+
+/* Prevent FontAwesome Icons from Inheriting Lato/Montserrat Splicing */
+.fa, 
+.fas, 
+.far, 
+.fab, 
+.fa-solid, 
+[class*="fa-"],
+button i,
+.btn-premium i {
+    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif !important;
+    font-weight: 900 !important;
+}
+
+/* Tailwind v2 Slate Color System Compatibility Overrides - Mapped to Deep Navy Blue */
+.bg-slate-900 {
+    background-color: rgba(15, 32, 66, var(--tw-bg-opacity, 1)) !important; /* Deep Navy Blue */
+}
+.bg-slate-950 {
+    background-color: rgba(10, 21, 43, var(--tw-bg-opacity, 1)) !important; /* Ultra Dark Navy */
+}
+.bg-slate-50 {
+    background-color: rgba(248, 250, 252, var(--tw-bg-opacity, 1)) !important;
+}
+.text-slate-300 {
+    color: #cbd5e1 !important;
+}
+.text-slate-400 {
+    color: #94a3b8 !important;
+}
+.text-slate-500 {
+    color: #64748b !important;
+}
+.text-slate-600 {
+    color: #475569 !important;
+}
+.text-slate-800 {
+    color: #1e293b !important;
+}
+.text-slate-900 {
+    color: #0f172a !important;
+}
+.text-slate-950 {
+    color: #020617 !important;
+}
+.border-slate-100 {
+    border-color: #f1f5f9 !important;
+}
+.border-slate-200 {
+    border-color: #e2e8f0 !important;
+}
+.border-slate-800 {
+    border-color: #1e293b !important;
+}
+
+/* Elementor Editor Button Background Restoration Override to counter Tailwind Preflight resets */
+.elementor-editor-active button.elementor-navigator-btn,
+.elementor-editor-active button.elementor-templates-modal-btn,
+.elementor-editor-active .elementor-add-section-area button,
+.elementor-editor-active .elementor-add-new-section button,
+.elementor-editor-active .elementor-add-section-inline button,
+.elementor-editor-active button[class*="elementor-"],
+.elementor-editor-active .elementor-button,
+.elementor-editor-active .elementor-icon,
+.elementor-editor-active .elementor-widget-container button {
+    background-color: initial;
+    color: initial;
+}
+
+/* Explicitly restore the Elementor pink Add Section button and gray Folder button */
+.elementor-editor-active .elementor-add-section-btn {
+    background-color: #e31b6d !important; /* Elementor Accent Pink */
+    color: #ffffff !important;
+}
+
+.elementor-editor-active .elementor-add-template-btn {
+    background-color: #6d7882 !important; /* Elementor Dark Gray */
+    color: #ffffff !important;
+}
