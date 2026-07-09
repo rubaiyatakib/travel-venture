@@ -118,11 +118,11 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                                 <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
                                 <?php if ( $location ) : ?>
                                     <div class="absolute top-4 left-4 bg-slate-900 bg-opacity-75 backdrop-filter backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center">
-                                        <i class="fa-solid fa-location-dot mr-1.5 text-teal-400"></i> <?php echo esc_html( $location ); ?>
+                                        <i class="fas fa-map-marker-alt mr-1.5 text-teal-400"></i> <?php echo esc_html( $location ); ?>
                                     </div>
                                 <?php endif; ?>
                                 <div class="absolute top-4 right-4 bg-white text-amber-600 px-3 py-1 rounded-full text-xs font-bold flex items-center shadow-sm">
-                                    <i class="fa-solid fa-star mr-1"></i> <?php echo esc_html( $rating ); ?>
+                                    <i class="fas fa-star mr-1"></i> <?php echo esc_html( $rating ); ?>
                                 </div>
                             </div>
                             <div class="p-6 flex flex-col flex-grow space-y-4">
@@ -141,7 +141,7 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                                         Rates from <span class="text-2xl font-extrabold text-slate-950 block sm:inline"><?php echo $currency_symbol; ?><?php echo esc_html( $price ); ?></span>
                                     </div>
                                     <a href="<?php echo esc_url( $detail_url ); ?>" class="btn-premium inline-flex items-center px-4 py-2.5 rounded-full text-xs font-semibold text-white bg-slate-900 hover:bg-teal-700 transition-colors">
-                                        Explore Stays <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                                        Explore Stays <i class="fas fa-chevron-right ml-1 text-[10px]"></i>
                                     </a>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
             <?php else : ?>
                 <div class="bg-slate-50 rounded-3xl p-12 text-center border border-slate-100 shadow-sm max-w-lg mx-auto">
                     <div class="w-16 h-16 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                        <i class="fa-solid fa-hotel"></i>
+                        <i class="fas fa-hotel"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">No Hotels Found</h3>
                     <p class="text-slate-500 text-sm leading-relaxed mb-6">We couldn't find any hotels matching your current search criteria. Try removing some filters or adjusting your budget range.</p>
@@ -187,7 +187,7 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
         <div class="lg:col-span-1">
             <aside class="sticky top-28 bg-white rounded-3xl p-6 border border-slate-100 shadow-md space-y-6">
                 <h3 class="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center font-montserrat">
-                    <i class="fa-solid fa-filter text-teal-600 mr-2 text-sm"></i> Filter Hotels
+                    <i class="fas fa-filter text-teal-600 mr-2 text-sm"></i> Filter Hotels
                 </h3>
                 <form method="GET" action="" class="space-y-5">
                     
@@ -196,7 +196,7 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                         <label for="hotel_name" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Hotel Name</label>
                         <div class="relative flex items-center">
                             <input type="text" id="hotel_name" name="hotel_name" placeholder="Search by name..." value="<?php echo esc_attr($search_name); ?>" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-800 bg-white" />
-                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-slate-400 text-sm"></i>
+                            <i class="fas fa-search absolute left-3.5 text-slate-400 text-sm"></i>
                         </div>
                     </div>
 
@@ -212,11 +212,11 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                     <!-- Buttons -->
                     <div class="space-y-3 pt-2">
                         <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-teal-700 shadow-sm transition-all flex items-center justify-center space-x-2 border-none cursor-pointer transform hover:-translate-y-0.5">
-                            <i class="fa-solid fa-magnifying-glass text-xs"></i> <span>Search Hotels</span>
+                            <i class="fas fa-search text-xs"></i> <span>Search Hotels</span>
                         </button>
                         <?php if ( $is_search_query ) : ?>
                             <a href="<?php echo esc_url( get_permalink() ); ?>" class="w-full py-2.5 rounded-xl text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200 hover:bg-slate-100 hover:text-slate-700 transition-all flex items-center justify-center space-x-2 text-center decoration-none">
-                                <i class="fa-solid fa-rotate-left"></i> <span>Clear Filters</span>
+                                <i class="fas fa-undo"></i> <span>Clear Filters</span>
                             </a>
                         <?php endif; ?>
                     </div>

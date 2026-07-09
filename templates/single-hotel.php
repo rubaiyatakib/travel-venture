@@ -278,7 +278,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                                 <?php if ( ! empty( $nearby_interest ) ) : ?>
                                     <div>
                                         <h4 class="font-bold text-slate-800 uppercase tracking-wider text-xs mb-3 flex items-center">
-                                            <i class="fa-solid fa-location-dot text-teal-600 mr-2"></i> Points of Interest
+                                            <i class="fas fa-map-marker-alt text-teal-600 mr-2"></i> Points of Interest
                                         </h4>
                                         <ul class="space-y-2.5 text-slate-600 font-semibold text-xs leading-relaxed">
                                             <?php
@@ -286,7 +286,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                                             foreach ( $lines as $line ) {
                                                 $line_trimmed = trim( $line );
                                                 if ( ! empty( $line_trimmed ) ) {
-                                                    echo '<li class="flex items-start space-x-2"><i class="fa-solid fa-map-pin text-slate-400 text-xs mt-1"></i> <span>' . esc_html( $line_trimmed ) . '</span></li>';
+                                                    echo '<li class="flex items-start space-x-2"><i class="fas fa-map-pin text-slate-400 text-xs mt-1"></i> <span>' . esc_html( $line_trimmed ) . '</span></li>';
                                                 }
                                             }
                                             ?>
@@ -297,7 +297,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                                 <?php if ( ! empty( $nearby_terminals ) ) : ?>
                                     <div>
                                         <h4 class="font-bold text-slate-800 uppercase tracking-wider text-xs mb-3 flex items-center">
-                                            <i class="fa-solid fa-plane-departure text-teal-600 mr-2"></i> Nearby Terminals
+                                            <i class="fas fa-plane-departure text-teal-600 mr-2"></i> Nearby Terminals
                                         </h4>
                                         <ul class="space-y-2.5 text-slate-600 font-semibold text-xs leading-relaxed">
                                             <?php
@@ -305,7 +305,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                                             foreach ( $lines as $line ) {
                                                 $line_trimmed = trim( $line );
                                                 if ( ! empty( $line_trimmed ) ) {
-                                                    echo '<li class="flex items-start space-x-2"><i class="fa-solid fa-car-side text-slate-400 text-xs mt-1"></i> <span>' . esc_html( $line_trimmed ) . '</span></li>';
+                                                    echo '<li class="flex items-start space-x-2"><i class="fas fa-car-side text-slate-400 text-xs mt-1"></i> <span>' . esc_html( $line_trimmed ) . '</span></li>';
                                                 }
                                             }
                                             ?>
@@ -338,7 +338,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                             <div class="grid grid-cols-2 gap-4 border-b border-slate-100 pb-6">
                                 <div class="flex items-center space-x-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
                                     <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-lg">
-                                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                        <i class="fas fa-sign-in-alt"></i>
                                     </div>
                                     <div>
                                         <span class="text-[9px] text-slate-400 uppercase tracking-wider block font-bold">Check In Time</span>
@@ -347,7 +347,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                                 </div>
                                 <div class="flex items-center space-x-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
                                     <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg">
-                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <i class="fas fa-sign-out-alt"></i>
                                     </div>
                                     <div>
                                         <span class="text-[9px] text-slate-400 uppercase tracking-wider block font-bold">Check Out Time</span>
@@ -360,7 +360,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                             <div class="space-y-6 text-xs font-semibold leading-relaxed">
                                 <?php if ( ! empty( $policy_child ) ) : ?>
                                     <div class="space-y-1.5">
-                                        <h4 class="font-bold text-slate-900 flex items-center"><i class="fa-solid fa-child text-teal-600 mr-2 text-sm"></i> Child Policy</h4>
+                                        <h4 class="font-bold text-slate-900 flex items-center"><i class="fas fa-child text-teal-600 mr-2 text-sm"></i> Child Policy</h4>
                                         <div class="text-slate-500 leading-relaxed font-medium pl-6 text-xs prose prose-sm max-w-none">
                                             <?php echo wpautop( wp_kses_post( $policy_child ) ); ?>
                                         </div>
@@ -369,7 +369,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
 
                                 <?php if ( ! empty( $policy_pet ) ) : ?>
                                     <div class="space-y-1.5">
-                                        <h4 class="font-bold text-slate-900 flex items-center"><i class="fa-solid fa-paw text-teal-600 mr-2 text-sm"></i> Pet Policy</h4>
+                                        <h4 class="font-bold text-slate-900 flex items-center"><i class="fas fa-paw text-teal-600 mr-2 text-sm"></i> Pet Policy</h4>
                                         <div class="text-slate-500 leading-relaxed font-medium pl-6 text-xs">
                                             <?php echo esc_html( $policy_pet ); ?>
                                         </div>
@@ -378,7 +378,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
 
                                 <?php if ( ! empty( $policy_extra ) ) : ?>
                                     <div class="space-y-1.5">
-                                        <h4 class="font-bold text-slate-900 flex items-center"><i class="fa-solid fa-bed text-teal-600 mr-2 text-sm"></i> Extra Bed &amp; Breakfast Policy</h4>
+                                        <h4 class="font-bold text-slate-900 flex items-center"><i class="fas fa-bed text-teal-600 mr-2 text-sm"></i> Extra Bed &amp; Breakfast Policy</h4>
                                         <div class="text-slate-500 leading-relaxed font-medium pl-6 text-xs prose prose-sm max-w-none">
                                             <?php echo wpautop( wp_kses_post( $policy_extra ) ); ?>
                                         </div>
@@ -387,7 +387,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
 
                                 <?php if ( ! empty( $policy_house ) ) : ?>
                                     <div class="space-y-2 border-t border-slate-100 pt-6">
-                                        <h4 class="font-bold text-slate-900 flex items-center mb-3"><i class="fa-solid fa-clipboard-list text-teal-600 mr-2 text-sm"></i> House Rules &amp; Guidelines</h4>
+                                        <h4 class="font-bold text-slate-900 flex items-center mb-3"><i class="fas fa-clipboard-list text-teal-600 mr-2 text-sm"></i> House Rules &amp; Guidelines</h4>
                                         <div class="text-slate-500 leading-relaxed font-medium pl-6 text-xs space-y-4 max-h-96 overflow-y-auto pr-2 prose prose-sm max-w-none">
                                             <?php echo wpautop( wp_kses_post( $policy_house ) ); ?>
                                         </div>

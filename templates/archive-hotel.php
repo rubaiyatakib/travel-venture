@@ -201,11 +201,11 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                             <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
                             <?php if ( $location ) : ?>
                                 <div class="absolute top-4 left-4 bg-slate-900 bg-opacity-75 backdrop-filter backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center">
-                                    <i class="fa-solid fa-location-dot mr-1.5 text-teal-400"></i> <?php echo esc_html( $location ); ?>
+                                    <i class="fas fa-map-marker-alt mr-1.5 text-teal-400"></i> <?php echo esc_html( $location ); ?>
                                 </div>
                             <?php endif; ?>
                             <div class="absolute top-4 right-4 bg-white text-amber-600 px-3 py-1 rounded-full text-xs font-bold flex items-center shadow-sm">
-                                <i class="fa-solid fa-star mr-1"></i> <?php echo esc_html( $rating ); ?>
+                                <i class="fas fa-star mr-1"></i> <?php echo esc_html( $rating ); ?>
                             </div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow space-y-4">
@@ -224,7 +224,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                                     Rates from <span class="text-2xl font-extrabold text-slate-950 block sm:inline"><?php echo $currency_symbol; ?><?php echo esc_html( $price ); ?></span>
                                 </div>
                                 <a href="<?php echo esc_url( $detail_url ); ?>" class="btn-premium inline-flex items-center px-4 py-2.5 rounded-full text-xs font-semibold text-white bg-slate-900 hover:bg-teal-700 transition-colors">
-                                    Explore Stays <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                                    Explore Stays <i class="fas fa-chevron-right ml-1 text-[10px]"></i>
                                 </a>
                             </div>
                         </div>
