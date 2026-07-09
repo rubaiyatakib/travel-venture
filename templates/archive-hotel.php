@@ -82,49 +82,16 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                 <div class="relative flex items-center">
                     <select id="location" name="location" class="w-full pl-10 pr-8 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all appearance-none bg-white text-slate-800">
                         <option value="">Any Destination</option>
-                        <option value="Cox's Bazar" <?php selected( $search_location, "Cox's Bazar" ); ?>>Cox's Bazar, Bangladesh</option>
-                        <option value="Amalfi Coast" <?php selected( $search_location, 'Amalfi Coast' ); ?>>Amalfi Coast</option>
-                        <option value="Bali" <?php selected( $search_location, 'Bali' ); ?>>Bali</option>
-                        <option value="Banff" <?php selected( $search_location, 'Banff' ); ?>>Banff</option>
-                        <option value="Barcelona" <?php selected( $search_location, 'Barcelona' ); ?>>Barcelona</option>
-                        <option value="Big Sur" <?php selected( $search_location, 'Big Sur' ); ?>>Big Sur</option>
-                        <option value="Bora Bora" <?php selected( $search_location, 'Bora Bora' ); ?>>Bora Bora</option>
-                        <option value="Cairo" <?php selected( $search_location, 'Cairo' ); ?>>Cairo</option>
-                        <option value="Cape Town" <?php selected( $search_location, 'Cape Town' ); ?>>Cape Town</option>
-                        <option value="Chamonix" <?php selected( $search_location, 'Chamonix' ); ?>>Chamonix</option>
-                        <option value="Costa Rica" <?php selected( $search_location, 'Costa Rica' ); ?>>Costa Rica</option>
-                        <option value="Dubrovnik" <?php selected( $search_location, 'Dubrovnik' ); ?>>Dubrovnik</option>
-                        <option value="Dubai" <?php selected( $search_location, 'Dubai' ); ?>>Dubai</option>
-                        <option value="Galapagos" <?php selected( $search_location, 'Galapagos' ); ?>>Galapagos</option>
-                        <option value="Iceland" <?php selected( $search_location, 'Iceland' ); ?>>Iceland</option>
-                        <option value="Kyoto" <?php selected( $search_location, 'Kyoto' ); ?>>Kyoto</option>
-                        <option value="Lake Como" <?php selected( $search_location, 'Lake Como' ); ?>>Lake Como</option>
-                        <option value="Lofoten" <?php selected( $search_location, 'Lofoten' ); ?>>Lofoten</option>
-                        <option value="Maldives" <?php selected( $search_location, 'Maldives' ); ?>>Maldives</option>
-                        <option value="Marrakech" <?php selected( $search_location, 'Marrakech' ); ?>>Marrakech</option>
-                        <option value="Maui" <?php selected( $search_location, 'Maui' ); ?>>Maui</option>
-                        <option value="Oaxaca" <?php selected( $search_location, 'Oaxaca' ); ?>>Oaxaca</option>
-                        <option value="Oahu" <?php selected( $search_location, 'Oahu' ); ?>>Oahu</option>
-                        <option value="Paris" <?php selected( $search_location, 'Paris' ); ?>>Paris</option>
-                        <option value="Patagonia" <?php selected( $search_location, 'Patagonia' ); ?>>Patagonia</option>
-                        <option value="Petra" <?php selected( $search_location, 'Petra' ); ?>>Petra</option>
-                        <option value="Phuket" <?php selected( $search_location, 'Phuket' ); ?>>Phuket</option>
-                        <option value="Queenstown" <?php selected( $search_location, 'Queenstown' ); ?>>Queenstown</option>
-                        <option value="Rio de Janeiro" <?php selected( $search_location, 'Rio de Janeiro' ); ?>>Rio de Janeiro</option>
-                        <option value="Sardinia" <?php selected( $search_location, 'Sardinia' ); ?>>Sardinia</option>
-                        <option value="Sedona" <?php selected( $search_location, 'Sedona' ); ?>>Sedona</option>
-                        <option value="Serengeti" <?php selected( $search_location, 'Serengeti' ); ?>>Serengeti</option>
-                        <option value="Seychelles" <?php selected( $search_location, 'Seychelles' ); ?>>Seychelles</option>
-                        <option value="Swiss Alps" <?php selected( $search_location, 'Swiss Alps' ); ?>>Swiss Alps</option>
-                        <option value="Sydney" <?php selected( $search_location, 'Sydney' ); ?>>Sydney</option>
-                        <option value="Tokyo" <?php selected( $search_location, 'Tokyo' ); ?>>Tokyo</option>
-                        <option value="Tuscany" <?php selected( $search_location, 'Tuscany' ); ?>>Tuscany</option>
-                        <option value="Venice" <?php selected( $search_location, 'Venice' ); ?>>Venice</option>
-                        <option value="Vienna" <?php selected( $search_location, 'Vienna' ); ?>>Vienna</option>
-                        <option value="Whitsundays" <?php selected( $search_location, 'Whitsundays' ); ?>>Whitsundays</option>
+                        <?php
+                        $unique_locations = travel_venture_get_unique_locations();
+                        foreach ( $unique_locations as $loc ) {
+                            $selected = ( isset( $search_location ) && $search_location === $loc ) ? 'selected' : '';
+                            echo '<option value="' . esc_attr( $loc ) . '" ' . $selected . '>' . esc_html( $loc ) . '</option>';
+                        }
+                        ?>
                     </select>
-                    <i class="fa-solid fa-location-dot absolute left-3.5 text-slate-400 text-sm"></i>
-                    <i class="fa-solid fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
+                    <i class="fas fa-map-marker-alt absolute left-3.5 text-slate-400 text-sm"></i>
+                    <i class="fas fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
                 </div>
             </div>
 

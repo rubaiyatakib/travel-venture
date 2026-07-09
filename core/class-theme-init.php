@@ -886,3 +886,18 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
 // Instantiate core theme hooks
 Travel_Venture_Init::get_instance();
 
+/**
+ * Get all unique hotel locations from database
+ */
+function travel_venture_get_unique_locations() {
+    global $wpdb;
+    $results = $wpdb->get_col( "
+        SELECT DISTINCT meta_value 
+        FROM {$wpdb->postmeta} 
+        WHERE meta_key = '_hotel_location' 
+          AND meta_value != ''
+        ORDER BY meta_value ASC
+    " );
+    return $results ? $results : array();
+}
+

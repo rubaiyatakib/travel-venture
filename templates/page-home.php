@@ -33,49 +33,16 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                     <div class="relative flex items-center">
                         <select id="location" name="location" class="w-full pl-10 pr-8 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all appearance-none bg-white text-slate-800">
                             <option value="">Any Destination</option>
-                            <option value="Cox's Bazar" selected>Cox's Bazar, Bangladesh</option>
-                            <option value="Amalfi Coast">Amalfi Coast</option>
-                            <option value="Bali">Bali</option>
-                            <option value="Banff">Banff</option>
-                            <option value="Barcelona">Barcelona</option>
-                            <option value="Big Sur">Big Sur</option>
-                            <option value="Bora Bora">Bora Bora</option>
-                            <option value="Cairo">Cairo</option>
-                            <option value="Cape Town">Cape Town</option>
-                            <option value="Chamonix">Chamonix</option>
-                            <option value="Costa Rica">Costa Rica</option>
-                            <option value="Dubrovnik">Dubrovnik</option>
-                            <option value="Dubai">Dubai</option>
-                            <option value="Galapagos">Galapagos</option>
-                            <option value="Iceland">Iceland</option>
-                            <option value="Kyoto">Kyoto</option>
-                            <option value="Lake Como">Lake Como</option>
-                            <option value="Lofoten">Lofoten</option>
-                            <option value="Maldives">Maldives</option>
-                            <option value="Marrakech">Marrakech</option>
-                            <option value="Maui">Maui</option>
-                            <option value="Oaxaca">Oaxaca</option>
-                            <option value="Oahu">Oahu</option>
-                            <option value="Paris">Paris</option>
-                            <option value="Patagonia">Patagonia</option>
-                            <option value="Petra">Petra</option>
-                            <option value="Phuket">Phuket</option>
-                            <option value="Queenstown">Queenstown</option>
-                            <option value="Rio de Janeiro">Rio de Janeiro</option>
-                            <option value="Sardinia">Sardinia</option>
-                            <option value="Sedona">Sedona</option>
-                            <option value="Serengeti">Serengeti</option>
-                            <option value="Seychelles">Seychelles</option>
-                            <option value="Swiss Alps">Swiss Alps</option>
-                            <option value="Sydney">Sydney</option>
-                            <option value="Tokyo">Tokyo</option>
-                            <option value="Tuscany">Tuscany</option>
-                            <option value="Venice">Venice</option>
-                            <option value="Vienna">Vienna</option>
-                            <option value="Whitsundays">Whitsundays</option>
+                            <?php
+                            $unique_locations = travel_venture_get_unique_locations();
+                            foreach ( $unique_locations as $loc ) {
+                                $selected = ( isset( $_GET['location'] ) && $_GET['location'] === $loc ) ? 'selected' : '';
+                                echo '<option value="' . esc_attr( $loc ) . '" ' . $selected . '>' . esc_html( $loc ) . '</option>';
+                            }
+                            ?>
                         </select>
-                        <i class="fa-solid fa-location-dot absolute left-3.5 text-slate-400 text-sm"></i>
-                        <i class="fa-solid fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
+                        <i class="fas fa-map-marker-alt absolute left-3.5 text-slate-400 text-sm"></i>
+                        <i class="fas fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
                     </div>
                 </div>
 
