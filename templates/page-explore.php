@@ -73,8 +73,49 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-grow">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
         
-        <!-- Left Side: Listings Grid -->
-        <div class="lg:col-span-3 space-y-8">
+        <!-- Right Side: Sidebar Search & Filter (Top on Mobile, Right on Desktop) -->
+        <div class="lg:col-span-1 lg:order-2">
+            <aside class="sticky top-28 bg-white rounded-3xl p-6 border border-slate-100 shadow-md space-y-6">
+                <h3 class="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center font-montserrat">
+                    <i class="fas fa-filter text-teal-600 mr-2 text-sm"></i> Filter Hotels
+                </h3>
+                <form method="GET" action="" class="space-y-5">
+                    
+                    <!-- Keyword search -->
+                    <div class="space-y-1.5">
+                        <label for="hotel_name" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Hotel Name</label>
+                        <div class="relative flex items-center">
+                            <input type="text" id="hotel_name" name="hotel_name" placeholder="Search by name..." value="<?php echo esc_attr($search_name); ?>" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-800 bg-white" />
+                            <i class="fas fa-search absolute left-3.5 text-slate-400 text-sm"></i>
+                        </div>
+                    </div>
+
+                    <!-- Price range search -->
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Price Range (<?php echo $currency_symbol; ?>)</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="number" name="min_price" placeholder="Min" value="<?php echo esc_attr($min_price); ?>" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-800 bg-white" />
+                            <input type="number" name="max_price" placeholder="Max" value="<?php echo esc_attr($max_price); ?>" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-800 bg-white" />
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="space-y-3 pt-2">
+                        <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-teal-700 shadow-sm transition-all flex items-center justify-center space-x-2 border-none cursor-pointer transform hover:-translate-y-0.5">
+                            <i class="fas fa-search text-xs"></i> <span>Search Hotels</span>
+                        </button>
+                        <?php if ( $is_search_query ) : ?>
+                            <a href="<?php echo esc_url( get_permalink() ); ?>" class="w-full py-2.5 rounded-xl text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200 hover:bg-slate-100 hover:text-slate-700 transition-all flex items-center justify-center space-x-2 text-center decoration-none">
+                                <i class="fas fa-undo"></i> <span>Clear Filters</span>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </aside>
+        </div>
+
+        <!-- Left Side: Listings Grid (Bottom on Mobile, Left on Desktop) -->
+        <div class="lg:col-span-3 lg:order-1 space-y-8">
             
             <!-- Active Criteria Pills -->
             <?php if ( $is_search_query ) : ?>
@@ -90,7 +131,7 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                         <span class="bg-white px-3 py-1.5 rounded-full border border-slate-200">Max Price: <?php echo $currency_symbol; ?><?php echo esc_html($max_price); ?></span>
                     <?php endif; ?>
                     <a href="<?php echo esc_url( get_permalink() ); ?>" class="text-teal-600 hover:text-teal-700 hover:underline text-xs ml-auto font-bold flex items-center gap-1">
-                        <i class="fa-solid fa-rotate-left text-[10px]"></i> Clear all
+                        <i class="fas fa-undo text-[10px]"></i> Clear all
                     </a>
                 </div>
             <?php endif; ?>
@@ -110,7 +151,10 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                         <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 flex flex-col h-full group">
                             <div class="relative overflow-hidden aspect-w-16 h-60">
                                 <?php
-                                $img_url = get_the_post_thumbnail_url( $id, 'large' );
+                                $img_url = get_post_meta( $id, '_hotel_image_featured_url', true );
+                                if ( empty( $img_url ) ) {
+                                    $img_url = get_the_post_thumbnail_url( $id, 'large' );
+                                }
                                 if ( ! $img_url || ( strpos( $img_url, 'localhost' ) === false && strpos( home_url(), 'localhost' ) === false ) ) {
                                     $img_url = 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80';
                                 }
@@ -181,47 +225,6 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                 </div>
             <?php endif; ?>
 
-        </div>
-
-        <!-- Right Side: Sidebar Search & Filter -->
-        <div class="lg:col-span-1">
-            <aside class="sticky top-28 bg-white rounded-3xl p-6 border border-slate-100 shadow-md space-y-6">
-                <h3 class="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center font-montserrat">
-                    <i class="fas fa-filter text-teal-600 mr-2 text-sm"></i> Filter Hotels
-                </h3>
-                <form method="GET" action="" class="space-y-5">
-                    
-                    <!-- Keyword search -->
-                    <div class="space-y-1.5">
-                        <label for="hotel_name" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Hotel Name</label>
-                        <div class="relative flex items-center">
-                            <input type="text" id="hotel_name" name="hotel_name" placeholder="Search by name..." value="<?php echo esc_attr($search_name); ?>" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-800 bg-white" />
-                            <i class="fas fa-search absolute left-3.5 text-slate-400 text-sm"></i>
-                        </div>
-                    </div>
-
-                    <!-- Price range search -->
-                    <div class="space-y-1.5">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Price Range (<?php echo $currency_symbol; ?>)</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="number" name="min_price" placeholder="Min" value="<?php echo esc_attr($min_price); ?>" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-800 bg-white" />
-                            <input type="number" name="max_price" placeholder="Max" value="<?php echo esc_attr($max_price); ?>" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-800 bg-white" />
-                        </div>
-                    </div>
-
-                    <!-- Buttons -->
-                    <div class="space-y-3 pt-2">
-                        <button type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-teal-700 shadow-sm transition-all flex items-center justify-center space-x-2 border-none cursor-pointer transform hover:-translate-y-0.5">
-                            <i class="fas fa-search text-xs"></i> <span>Search Hotels</span>
-                        </button>
-                        <?php if ( $is_search_query ) : ?>
-                            <a href="<?php echo esc_url( get_permalink() ); ?>" class="w-full py-2.5 rounded-xl text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200 hover:bg-slate-100 hover:text-slate-700 transition-all flex items-center justify-center space-x-2 text-center decoration-none">
-                                <i class="fas fa-undo"></i> <span>Clear Filters</span>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                </form>
-            </aside>
         </div>
 
     </div>

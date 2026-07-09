@@ -437,3 +437,65 @@ button i,
     background-color: #6d7882 !important; /* Elementor Dark Gray */
     color: #ffffff !important;
 }
+
+/* 
+ * Mobile & Tablet Optimization Media Queries
+ */
+@media (max-width: 767.98px) {
+    /* Optimize large header text-wrap & sizing on mobile views */
+    h1 {
+        font-size: 1.875rem !important; /* 30px */
+        line-height: 2.25rem !important;
+    }
+    h2 {
+        font-size: 1.5rem !important; /* 24px */
+        line-height: 2rem !important;
+    }
+    h3 {
+        font-size: 1.25rem !important; /* 20px */
+        line-height: 1.75rem !important;
+    }
+
+    /* Compress tall vertical padding blocks for tight mobile layouts */
+    .py-16 {
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+    }
+    .py-24 {
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+    }
+    .pb-48 {
+        padding-bottom: 5rem !important;
+    }
+    section.pt-24.pb-48 {
+        padding-top: 3.5rem !important;
+        padding-bottom: 5rem !important;
+    }
+
+    /* Padding adjustments for compact form and card structures */
+    #search-form-index {
+        padding: 1.25rem !important;
+        border-radius: 1.5rem !important;
+    }
+    .glassmorphism {
+        padding: 1.5rem !important;
+        border-radius: 1.5rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Optimizations for medium tab viewports */
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 3rem !important;
+    }
+    h2 {
+        font-size: 2rem !important;
+        line-height: 2.5rem !important;
+    }
+    section.pt-24.pb-48 {
+        padding-top: 5rem !important;
+        padding-bottom: 7rem !important;
+    }
+}

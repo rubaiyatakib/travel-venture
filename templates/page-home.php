@@ -220,15 +220,18 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                     <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 flex flex-col h-full group">
                         <div class="relative overflow-hidden aspect-w-16 h-64">
                             <?php
-                            $img_url = get_the_post_thumbnail_url( $id, 'large' );
-                            if ( ! $img_url || ( strpos( $img_url, 'localhost' ) !== false && strpos( home_url(), 'localhost' ) === false ) ) {
+                            $img_url = get_post_meta( $id, '_hotel_image_featured_url', true );
+                            if ( empty( $img_url ) ) {
+                                $img_url = get_the_post_thumbnail_url( $id, 'large' );
+                            }
+                            if ( ! $img_url || ( strpos( $img_url, 'localhost' ) === false && strpos( home_url(), 'localhost' ) === false ) ) {
                                 $img_url = 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80';
                             }
                             ?>
                             <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
                             <?php if ( $location ) : ?>
-                                <div class="absolute top-4 left-4 bg-slate-900 bg-opacity-75 backdrop-filter backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                    <?php echo esc_html( $location ); ?>
+                                <div class="absolute top-4 left-4 bg-slate-900 bg-opacity-75 backdrop-filter backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-1.5 text-teal-400"></i> <?php echo esc_html( $location ); ?>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -238,7 +241,7 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                                     <a href="<?php echo esc_url( $detail_url ); ?>"><?php the_title(); ?></a>
                                 </h3>
                                 <div class="flex items-center text-amber-500 font-bold text-sm">
-                                    <i class="fa-solid fa-star mr-1"></i> 5.0
+                                    <i class="fas fa-star mr-1"></i> 5.0
                                 </div>
                             </div>
                             <p class="text-slate-500 text-xs leading-relaxed flex-grow">
@@ -254,9 +257,20 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                                     </div>
                                 </div>
                             <?php endif; ?>
-                            <a href="<?php echo esc_url( $detail_url ); ?>" class="w-full py-2.5 rounded-xl text-center text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-teal-700 hover:to-emerald-600 transition-all duration-300">
-                                View Details
-                            </a>
+                            <div class="space-y-2 pt-2">
+                                <a href="<?php echo esc_url( $detail_url ); ?>" class="w-full py-2.5 rounded-xl text-center text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-teal-700 hover:to-emerald-600 transition-all duration-300 block decoration-none">
+                                    View Details
+                                </a>
+                                <?php
+                                $contact = get_post_meta( $id, '_hotel_contact', true );
+                                ?>
+                                <button type="button" class="homepage-booking-btn w-full py-2.5 rounded-xl text-center text-xs font-bold text-slate-950 bg-slate-100 hover:bg-teal-700 hover:text-white transition-all duration-300 border-none cursor-pointer flex items-center justify-center space-x-1.5"
+                                        data-hotel="<?php the_title_attribute(); ?>"
+                                        data-phone="<?php echo esc_attr( $contact ); ?>"
+                                        data-price="<?php echo esc_attr( $price ); ?>">
+                                    <i class="fas fa-calendar-check text-[11px]"></i> <span>Click for Booking</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 <?php
@@ -274,6 +288,77 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <?php the_content(); ?>
 </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900 bg-opacity-60 backdrop-filter backdrop-blur-md close-modal-trigger">
+        <div class="relative w-full max-w-lg p-8 md:p-10 rounded-3xl glassmorphism text-slate-900 shadow-2xl transition-all duration-300 transform scale-95" onclick="event.stopPropagation();">
+            
+            <button type="button" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors close-modal-trigger text-2xl font-bold p-2 focus:outline-none">
+                &times;
+            </button>
+
+            <div class="w-16 h-16 mx-auto mb-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-2xl shadow-inner">
+                <i class="fas fa-phone-volume"></i>
+            </div>
+
+            <div class="text-center space-y-2 mb-6">
+                <span class="text-teal-600 font-semibold tracking-wider text-xs uppercase font-montserrat">Direct Concierge Route</span>
+                <h3 id="modal-hotel-title" class="text-2xl font-bold font-montserrat tracking-tight">Hotel Title</h3>
+            </div>
+
+            <div id="modal-welcome-text" class="text-slate-600 text-sm leading-relaxed mb-8 text-center">
+                Loading welcome message...
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                <div class="text-left">
+                    <span class="text-slate-400 text-[10px] uppercase tracking-wider block">Reservations Desk</span>
+                    <span id="modal-phone-number-display" class="text-slate-900 font-extrabold text-base font-montserrat">+1 (800) 000-0000</span>
+                </div>
+                <a id="modal-call-btn" href="#" class="pulse-call-btn inline-flex items-center px-6 py-3.5 bg-gradient-to-r from-blue-600 to-sky-500 hover:from-teal-700 hover:to-emerald-600 text-white font-bold text-sm rounded-xl transition-all shadow-md">
+                    <i class="fas fa-phone mr-2"></i> Call to Reserve
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal JS Handler for Home Page -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookingBtns = document.querySelectorAll('.homepage-booking-btn');
+        const modal = document.getElementById('booking-modal');
+        const closeModalButtons = document.querySelectorAll('.close-modal-trigger');
+
+        bookingBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const hotelName = btn.getAttribute('data-hotel');
+                const phone = btn.getAttribute('data-phone');
+                const price = btn.getAttribute('data-price');
+                const phoneFormatted = phone.replace(/[^+\d]/g, '');
+
+                document.getElementById('modal-hotel-title').textContent = hotelName;
+                document.getElementById('modal-phone-number-display').textContent = phone;
+                document.getElementById('modal-call-btn').setAttribute('href', 'tel:' + phoneFormatted);
+
+                let welcomeMsg = 'Welcome to the booking gate for <strong>' + hotelName + '</strong>. We are thrilled to assist you with organizing your luxury stay.';
+                welcomeMsg += '<br><br>Your reservation will be customized at the exclusive rate starting from <span class="text-teal-600 font-bold">৳' + price + '</span> per night.';
+                welcomeMsg += '<br><br>To finalize your dates, room selection, and secure your booking, click the call button below to connect with our dedicated reservations desk.';
+                document.getElementById('modal-welcome-text').innerHTML = welcomeMsg;
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModalButtons.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    });
+    </script>
 
 <?php
 get_footer();

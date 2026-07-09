@@ -335,7 +335,7 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-sm space-y-6">
                             
                             <!-- Check-in / Check-out timing rows -->
-                            <div class="grid grid-cols-2 gap-4 border-b border-slate-100 pb-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b border-slate-100 pb-6">
                                 <div class="flex items-center space-x-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
                                     <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-lg">
                                         <i class="fas fa-sign-in-alt"></i>
