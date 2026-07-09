@@ -129,7 +129,110 @@ function travel_venture_hotel_details_callback( $post ) {
             </div>
         </div>
 
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e2e8f0;" />
+
+        <!-- Scorecards, Badges & Ratings -->
+        <h3><?php esc_html_e( 'Ratings & Badge Options', 'tripazai' ); ?></h3>
+        
+        <?php
+        $rating_location   = get_post_meta( $post->ID, '_hotel_rating_location', true );
+        $rating_comfort    = get_post_meta( $post->ID, '_hotel_rating_comfort', true );
+        $rating_facilities = get_post_meta( $post->ID, '_hotel_rating_facilities', true );
+        $reviews_count     = get_post_meta( $post->ID, '_hotel_reviews_count', true );
+        $couple_friendly   = get_post_meta( $post->ID, '_hotel_couple_friendly', true );
+        ?>
+
+        <div class="hotel-meta-field-row row-half" style="display:inline-block; width: 48%; margin-right: 2%;">
+            <label for="hotel_rating_location"><?php esc_html_e( 'Location Rating Score (1 to 5)', 'tripazai' ); ?></label>
+            <input type="text" id="hotel_rating_location" name="hotel_rating_location" value="<?php echo esc_attr( $rating_location ); ?>" placeholder="e.g. 4.6" />
+        </div>
+
+        <div class="hotel-meta-field-row row-half" style="display:inline-block; width: 48%;">
+            <label for="hotel_rating_comfort"><?php esc_html_e( 'Comfort Rating Score (1 to 5)', 'tripazai' ); ?></label>
+            <input type="text" id="hotel_rating_comfort" name="hotel_rating_comfort" value="<?php echo esc_attr( $rating_comfort ); ?>" placeholder="e.g. 4.5" />
+        </div>
+
+        <div class="hotel-meta-field-row row-half" style="display:inline-block; width: 48%; margin-right: 2%; margin-top: 15px;">
+            <label for="hotel_rating_facilities"><?php esc_html_e( 'Facilities Rating Score (1 to 5)', 'tripazai' ); ?></label>
+            <input type="text" id="hotel_rating_facilities" name="hotel_rating_facilities" value="<?php echo esc_attr( $rating_facilities ); ?>" placeholder="e.g. 4.5" />
+        </div>
+
+        <div class="hotel-meta-field-row row-half" style="display:inline-block; width: 48%; margin-top: 15px;">
+            <label for="hotel_reviews_count"><?php esc_html_e( 'Total Reviews Count', 'tripazai' ); ?></label>
+            <input type="number" id="hotel_reviews_count" name="hotel_reviews_count" value="<?php echo esc_attr( $reviews_count ); ?>" placeholder="e.g. 127" />
+        </div>
+
+        <div class="hotel-meta-field-row" style="margin-top: 15px;">
+            <label>
+                <input type="checkbox" name="hotel_couple_friendly" value="yes" <?php checked( $couple_friendly, 'yes' ); ?> />
+                <strong><?php esc_html_e( 'Enable "Couple Friendly" Badge', 'tripazai' ); ?></strong>
+            </label>
+        </div>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e2e8f0;" />
+
+        <!-- What's Nearby Points -->
+        <h3><?php esc_html_e( 'Attractions & Terminals (What\'s Nearby)', 'tripazai' ); ?></h3>
+        
+        <?php
+        $nearby_interest  = get_post_meta( $post->ID, '_hotel_nearby_interest', true );
+        $nearby_terminals = get_post_meta( $post->ID, '_hotel_nearby_terminals', true );
+        ?>
+
+        <div class="hotel-meta-field-row">
+            <label for="hotel_nearby_interest"><?php esc_html_e( 'Points of Interest (One per line)', 'tripazai' ); ?></label>
+            <textarea id="hotel_nearby_interest" name="hotel_nearby_interest" rows="4" placeholder="e.g. 0.077 km from Kolatoli Beach, Cox's Bazar&#10;4.4 km from Radiant Fish World"><?php echo esc_textarea( $nearby_interest ); ?></textarea>
+        </div>
+
+        <div class="hotel-meta-field-row" style="margin-top: 15px;">
+            <label for="hotel_nearby_terminals"><?php esc_html_e( 'Nearby Terminals (One per line)', 'tripazai' ); ?></label>
+            <textarea id="hotel_nearby_terminals" name="hotel_nearby_terminals" rows="3" placeholder="e.g. 4.8 km from Cox's Bazar Airport&#10;5.6 km from Cox's Bazar Railway Station"><?php echo esc_textarea( $nearby_terminals ); ?></textarea>
+        </div>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e2e8f0;" />
+
+        <!-- Policies & Rules -->
+        <h3><?php esc_html_e( 'Hotel Policies & Rules', 'tripazai' ); ?></h3>
+
+        <?php
+        $check_in     = get_post_meta( $post->ID, '_hotel_check_in', true );
+        $check_out    = get_post_meta( $post->ID, '_hotel_check_out', true );
+        $policy_child = get_post_meta( $post->ID, '_hotel_policy_child', true );
+        $policy_pet   = get_post_meta( $post->ID, '_hotel_policy_pet', true );
+        $policy_extra = get_post_meta( $post->ID, '_hotel_policy_extra', true );
+        $policy_house = get_post_meta( $post->ID, '_hotel_policy_house', true );
+        ?>
+
+        <div class="hotel-meta-field-row row-half" style="display:inline-block; width: 48%; margin-right: 2%;">
+            <label for="hotel_check_in"><?php esc_html_e( 'Check In Time (e.g. 14:00)', 'tripazai' ); ?></label>
+            <input type="text" id="hotel_check_in" name="hotel_check_in" value="<?php echo esc_attr( $check_in ); ?>" placeholder="14:00" />
+        </div>
+
+        <div class="hotel-meta-field-row row-half" style="display:inline-block; width: 48%;">
+            <label for="hotel_check_out"><?php esc_html_e( 'Check Out Time (e.g. 12:00)', 'tripazai' ); ?></label>
+            <input type="text" id="hotel_check_out" name="hotel_check_out" value="<?php echo esc_attr( $check_out ); ?>" placeholder="12:00" />
+        </div>
+
+        <div class="hotel-meta-field-row" style="margin-top: 15px;">
+            <label for="hotel_policy_child"><?php esc_html_e( 'Child Policy', 'tripazai' ); ?></label>
+            <textarea id="hotel_policy_child" name="hotel_policy_child" rows="3"><?php echo esc_textarea( $policy_child ); ?></textarea>
+        </div>
+
+        <div class="hotel-meta-field-row" style="margin-top: 15px;">
+            <label for="hotel_policy_pet"><?php esc_html_e( 'Pet Policy', 'tripazai' ); ?></label>
+            <input type="text" id="hotel_policy_pet" name="hotel_policy_pet" value="<?php echo esc_attr( $policy_pet ); ?>" placeholder="Not Allowed" />
+        </div>
+
+        <div class="hotel-meta-field-row" style="margin-top: 15px;">
+            <label for="hotel_policy_extra"><?php esc_html_e( 'Extra Bed & Breakfast Policy', 'tripazai' ); ?></label>
+            <textarea id="hotel_policy_extra" name="hotel_policy_extra" rows="3"><?php echo esc_textarea( $policy_extra ); ?></textarea>
+        </div>
+
+        <div class="hotel-meta-field-row" style="margin-top: 15px;">
+            <label for="hotel_policy_house"><?php esc_html_e( 'House Rules & Special Guidelines (HTML/text supported)', 'tripazai' ); ?></label>
+            <textarea id="hotel_policy_house" name="hotel_policy_house" rows="6"><?php echo esc_textarea( $policy_house ); ?></textarea>
+        </div>
+
     </div>
     <?php
 }
-

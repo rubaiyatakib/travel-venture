@@ -30,6 +30,7 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
         private function __construct() {
             // Setup CPT and Theme support
             add_action( 'init', array( $this, 'register_hotel_cpt' ) );
+            add_action( 'init', array( $this, 'seed_sayeman_beach_resort' ), 20 );
             add_action( 'after_setup_theme', array( $this, 'theme_setup' ) );
 
             // Customizer Integration
@@ -563,6 +564,80 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
 
             // Save confirmation option
             update_option( 'travel_venture_seeded', true );
+        }
+
+        /**
+         * Programmatically seed Sayeman Beach Resort with detailed metadata and policies.
+         */
+        public function seed_sayeman_beach_resort() {
+            $post_title = 'Sayeman Beach Resort';
+            $post_name  = sanitize_title( $post_title );
+            
+            // Check if post already exists
+            $existing_post = get_page_by_path( $post_name, OBJECT, 'hotel' );
+            if ( $existing_post ) {
+                return;
+            }
+
+            $post_content = "After fifty years of glorious past, Sayeman Beach Resort revives its famed legacy of comfort, elegance and impeccable service. An eminent landmark constructed in 1964, this legendary first private hotel of Cox's Bazar is reborn, infusing modern sophistication into this vintage-chic, iconic hotel at a new beachfront location of Marine Drive, Kolatoli, Cox's Bazar.
+
+With its richly historic past, the Hotel Sayeman now fully becomes a part of the exciting and rapidly changing present with the addition of a modern, elegant luxury ocean front hotel. The beauty of Cox's Bazar - the climate, the panoramic ocean views, the sandy beaches, plus the rich culture and history along with the warmth of the sun - is what attracts people here. And the Sayeman Beach Resort provides you exactly just that with extraordinary comfort, luxury and services.";
+
+            $post_id = wp_insert_post( array(
+                'post_title'   => $post_title,
+                'post_name'    => $post_name,
+                'post_content' => $post_content,
+                'post_excerpt' => "After fifty years of glorious past, Sayeman Beach Resort revives its famed legacy of comfort, elegance and impeccable service at Marine Drive, Kolatoli.",
+                'post_status'  => 'publish',
+                'post_type'    => 'hotel',
+            ) );
+
+            if ( $post_id && ! is_wp_error( $post_id ) ) {
+                update_post_meta( $post_id, '_hotel_price', '12500' );
+                update_post_meta( $post_id, '_hotel_location', "Marine Drive Road, Kolatoli, Cox's Bazar, Bangladesh" );
+                update_post_meta( $post_id, '_hotel_contact', '01712345678' );
+                update_post_meta( $post_id, '_hotel_rating_location', '4.6' );
+                update_post_meta( $post_id, '_hotel_rating_comfort', '4.5' );
+                update_post_meta( $post_id, '_hotel_rating_facilities', '4.5' );
+                update_post_meta( $post_id, '_hotel_reviews_count', '127' );
+                update_post_meta( $post_id, '_hotel_couple_friendly', 'yes' );
+                
+                // Amenities CSV list
+                update_post_meta( $post_id, '_hotel_amenities', 'Conference Hostess, Garden, Mobile Phone Coverage, Medical Service, Tours/Ticket Assistance, Sofa Bed, Swimming Pool, Gym, Massage, Buffet Lunch, Buffet Dinner, Air Conditioning, Couple Friendly' );
+                
+                // Nearby Points of Interest & Terminals
+                $interest = "0.077 km from Kolatoli Beach, Cox's Bazar\n4.4 km from Radiant Fish World\n1.7 km from Sugondha Sea Beach, Cox's Bazar\n2.8 km from Laboni Beach\n23.4 km from Inani Beach, Coxs Bazar\n0.7 km from Sandy Beach Restaurant & Resort\n0.55 km from Shalik Restaurant";
+                $terminals = "4.8 km from Cox's Bazar Airport\n5.6 km from Cox's Bazar Railway Station\n0.35 km from Kolatoli Bus Stand\n3.8 km from Falong Zee Restaurant";
+                
+                update_post_meta( $post_id, '_hotel_nearby_interest', $interest );
+                update_post_meta( $post_id, '_hotel_nearby_terminals', $terminals );
+                
+                // Policies & Rules
+                update_post_meta( $post_id, '_hotel_check_in', '14:00' );
+                update_post_meta( $post_id, '_hotel_check_out', '12:00' );
+                
+                $child_policy = "Two children under the age of 4 years will enjoy a complimentary stay and breakfast.\n\nChildren between the ages of 5 and 9 years will enjoy a complimentary stay, but need to pay BDT 650 for breakfast and BDT 650 for swimming.\n\nChildren over the age of 9 years is considered an adult, hence an extra bed along with breakfast is required, for which BDT 2,600 needed to be paid at the hotel reception.\n\nExtra breakfast cost: BDT 1,300.\n\nThe charge for an extra bed & breakfast may change at any time as per the hotel's policy prior to the check-in date.";
+                update_post_meta( $post_id, '_hotel_policy_child', $child_policy );
+                update_post_meta( $post_id, '_hotel_policy_pet', 'Not Allowed' );
+                
+                $extra_policy = "The rate for an extra bed with breakfast is BDT 2,600.\n\nExtra breakfast cost: BDT 1,300.\n\nThe charge for an extra bed and breakfast may change at any time, as per the hotel's policy, prior to the check-in date.";
+                update_post_meta( $post_id, '_hotel_policy_extra', $extra_policy );
+                
+                $house_rules = "• <strong>For date change requests:</strong> For any date change requests on refundable bookings within 72+ hours before check-in, customers are advised to cancel and rebook for a new date.\n\n"
+                    . "• <strong>Check-in & Check-out:</strong> Hotel check-in time is 02:00 PM (14:00 hours), and check-out time is 12:00 PM (12:00 hours).\n\n"
+                    . "• <strong>Holiday Policy:</strong> During blackout/long Holidays period, the cancellation policy will not be applicable.\n\n"
+                    . "• <strong>ID Requirement:</strong> Each guest must present a copy of their valid NID or other forms of identification documents during check-in.\n\n"
+                    . "• <strong>Airport Shuttle:</strong> Complimentary airport pick-up and drop-off services are available based on the flight schedules of Cox's Bazar.\n\n"
+                    . "• <strong>Early/Late Policy:</strong> Generally, early check-in is possible if there is a vacant room available upon arrival. It is necessary to book hotel accommodation 1 day ahead for a guaranteed early check-in.\n\n"
+                    . "• <strong>Complimentary Breakfast:</strong> Complimentary Buffet Breakfast for two (per bedroom) is available at Casablanca Restaurant on the 2nd Floor (7:00 AM - 10:30 AM).\n\n"
+                    . "• <strong>Outside Food:</strong> Outside food, beverages, and alcohol are not allowed.\n\n"
+                    . "• <strong>Pool Costumes:</strong> Guests are requested to wear appropriate synthetic swimming costumes. Men: only synthetic sports shorts; Women: only long synthetic sports leggings and synthetic sports T-shirt. Pool timing: 07:00 AM to 07:00 PM.\n\n"
+                    . "• <strong>Gym:</strong> Gym usage requires a proper dress code and sports shoes, with a maximum of 2 adults per bedroom entitled to 1-hour complimentary use from 7:00 AM to 9:00 PM.\n\n"
+                    . "• <strong>General Restrictions:</strong> Outside guests are not allowed in the room. Sound boxes, loud music, or loud sound are not allowed in the room and hotel premises. Rice cookers or any other electronic items are not allowed. Personal photographers are not allowed.\n\n"
+                    . "• <strong>Driver Accommodation:</strong> No driver accommodation is available at the hotel premise.";
+                
+                update_post_meta( $post_id, '_hotel_policy_house', $house_rules );
+            }
         }
     }
 }
