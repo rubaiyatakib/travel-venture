@@ -54,15 +54,15 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                     <div class="flex flex-wrap items-center gap-3">
                         <?php if ( $location ) : ?>
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-100">
-                                <i class="fa-solid fa-location-dot mr-1"></i> <?php echo esc_html( $location ); ?>
+                                <i class="fas fa-map-marker-alt mr-1"></i> <?php echo esc_html( $location ); ?>
                             </span>
                         <?php endif; ?>
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-100">
-                            <i class="fa-solid fa-star mr-1"></i> <?php echo esc_html( $rating ); ?> Star Rating
+                            <i class="fas fa-star mr-1"></i> <?php echo esc_html( $rating ); ?> Star Rating
                         </span>
                         <?php if ( $couple_friendly === 'yes' ) : ?>
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 border border-pink-100">
-                                <i class="fa-solid fa-heart mr-1.5 text-pink-500"></i> Couple Friendly
+                                <i class="fas fa-heart mr-1.5 text-pink-500"></i> Couple Friendly
                             </span>
                         <?php endif; ?>
                     </div>
@@ -163,10 +163,10 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                     
                     <!-- Navigation Buttons -->
                     <button type="button" id="prev-slide-btn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-900 bg-opacity-50 hover:bg-opacity-75 text-white w-10 h-10 rounded-full flex items-center justify-center border-none cursor-pointer z-20">
-                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                        <i class="fas fa-chevron-left text-sm"></i>
                     </button>
                     <button type="button" id="next-slide-btn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-slate-900 bg-opacity-50 hover:bg-opacity-75 text-white w-10 h-10 rounded-full flex items-center justify-center border-none cursor-pointer z-20">
-                        <i class="fa-solid fa-chevron-right text-sm"></i>
+                        <i class="fas fa-chevron-right text-sm"></i>
                     </button>
 
                     <!-- Dots Indicators -->
