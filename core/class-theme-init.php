@@ -30,7 +30,7 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
         private function __construct() {
             // Setup CPT and Theme support
             add_action( 'init', array( $this, 'register_hotel_cpt' ) );
-            add_action( 'init', array( $this, 'seed_sayeman_beach_resort' ), 20 );
+            add_action( 'init', array( $this, 'seed_coxs_bazar_hotels' ), 20 );
             add_action( 'after_setup_theme', array( $this, 'theme_setup' ) );
 
             // Customizer Integration
@@ -436,9 +436,9 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                 ));
             }
 
-            if ( get_option( 'travel_venture_seeded' ) ) {
-                return; // Already seeded
-            }
+            // We now seed Cox's Bazar hotels dynamically in seed_coxs_bazar_hotels()
+            update_option( 'travel_venture_seeded', true );
+            return;
 
             // Setup require file for sideloading images
             require_once ABSPATH . 'wp-admin/includes/image.php';
@@ -567,77 +567,293 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
         }
 
         /**
-         * Programmatically seed Sayeman Beach Resort with detailed metadata and policies.
+         * Programmatically clean old hotels and seed 10 Cox's Bazar hotels from GoZayaan.
          */
-        public function seed_sayeman_beach_resort() {
-            $post_title = 'Sayeman Beach Resort';
-            $post_name  = sanitize_title( $post_title );
-            
-            // Check if post already exists
-            $existing_post = get_page_by_path( $post_name, OBJECT, 'hotel' );
-            if ( $existing_post ) {
+        public function seed_coxs_bazar_hotels() {
+            // Run only once
+            if ( get_option( 'travel_venture_coxs_bazar_seeded_v3' ) ) {
                 return;
             }
 
-            $post_content = "After fifty years of glorious past, Sayeman Beach Resort revives its famed legacy of comfort, elegance and impeccable service. An eminent landmark constructed in 1964, this legendary first private hotel of Cox's Bazar is reborn, infusing modern sophistication into this vintage-chic, iconic hotel at a new beachfront location of Marine Drive, Kolatoli, Cox's Bazar.
-
-With its richly historic past, the Hotel Sayeman now fully becomes a part of the exciting and rapidly changing present with the addition of a modern, elegant luxury ocean front hotel. The beauty of Cox's Bazar - the climate, the panoramic ocean views, the sandy beaches, plus the rich culture and history along with the warmth of the sun - is what attracts people here. And the Sayeman Beach Resort provides you exactly just that with extraordinary comfort, luxury and services.";
-
-            $post_id = wp_insert_post( array(
-                'post_title'   => $post_title,
-                'post_name'    => $post_name,
-                'post_content' => $post_content,
-                'post_excerpt' => "After fifty years of glorious past, Sayeman Beach Resort revives its famed legacy of comfort, elegance and impeccable service at Marine Drive, Kolatoli.",
-                'post_status'  => 'publish',
-                'post_type'    => 'hotel',
+            // 1. Delete all existing hotel posts
+            $existing_hotels = get_posts( array(
+                'post_type'   => 'hotel',
+                'numberposts' => -1,
+                'post_status' => 'any',
             ) );
 
-            if ( $post_id && ! is_wp_error( $post_id ) ) {
-                update_post_meta( $post_id, '_hotel_price', '12500' );
-                update_post_meta( $post_id, '_hotel_location', "Marine Drive Road, Kolatoli, Cox's Bazar, Bangladesh" );
-                update_post_meta( $post_id, '_hotel_contact', '01712345678' );
-                update_post_meta( $post_id, '_hotel_rating_location', '4.6' );
-                update_post_meta( $post_id, '_hotel_rating_comfort', '4.5' );
-                update_post_meta( $post_id, '_hotel_rating_facilities', '4.5' );
-                update_post_meta( $post_id, '_hotel_reviews_count', '127' );
-                update_post_meta( $post_id, '_hotel_couple_friendly', 'yes' );
-                
-                // Amenities CSV list
-                update_post_meta( $post_id, '_hotel_amenities', 'Conference Hostess, Garden, Mobile Phone Coverage, Medical Service, Tours/Ticket Assistance, Sofa Bed, Swimming Pool, Gym, Massage, Buffet Lunch, Buffet Dinner, Air Conditioning, Couple Friendly' );
-                
-                // Nearby Points of Interest & Terminals
-                $interest = "0.077 km from Kolatoli Beach, Cox's Bazar\n4.4 km from Radiant Fish World\n1.7 km from Sugondha Sea Beach, Cox's Bazar\n2.8 km from Laboni Beach\n23.4 km from Inani Beach, Coxs Bazar\n0.7 km from Sandy Beach Restaurant & Resort\n0.55 km from Shalik Restaurant";
-                $terminals = "4.8 km from Cox's Bazar Airport\n5.6 km from Cox's Bazar Railway Station\n0.35 km from Kolatoli Bus Stand\n3.8 km from Falong Zee Restaurant";
-                
-                update_post_meta( $post_id, '_hotel_nearby_interest', $interest );
-                update_post_meta( $post_id, '_hotel_nearby_terminals', $terminals );
-                
-                // Policies & Rules
-                update_post_meta( $post_id, '_hotel_check_in', '14:00' );
-                update_post_meta( $post_id, '_hotel_check_out', '12:00' );
-                
-                $child_policy = "Two children under the age of 4 years will enjoy a complimentary stay and breakfast.\n\nChildren between the ages of 5 and 9 years will enjoy a complimentary stay, but need to pay BDT 650 for breakfast and BDT 650 for swimming.\n\nChildren over the age of 9 years is considered an adult, hence an extra bed along with breakfast is required, for which BDT 2,600 needed to be paid at the hotel reception.\n\nExtra breakfast cost: BDT 1,300.\n\nThe charge for an extra bed & breakfast may change at any time as per the hotel's policy prior to the check-in date.";
-                update_post_meta( $post_id, '_hotel_policy_child', $child_policy );
-                update_post_meta( $post_id, '_hotel_policy_pet', 'Not Allowed' );
-                
-                $extra_policy = "The rate for an extra bed with breakfast is BDT 2,600.\n\nExtra breakfast cost: BDT 1,300.\n\nThe charge for an extra bed and breakfast may change at any time, as per the hotel's policy, prior to the check-in date.";
-                update_post_meta( $post_id, '_hotel_policy_extra', $extra_policy );
-                
-                $house_rules = "• <strong>For date change requests:</strong> For any date change requests on refundable bookings within 72+ hours before check-in, customers are advised to cancel and rebook for a new date.\n\n"
-                    . "• <strong>Check-in & Check-out:</strong> Hotel check-in time is 02:00 PM (14:00 hours), and check-out time is 12:00 PM (12:00 hours).\n\n"
-                    . "• <strong>Holiday Policy:</strong> During blackout/long Holidays period, the cancellation policy will not be applicable.\n\n"
-                    . "• <strong>ID Requirement:</strong> Each guest must present a copy of their valid NID or other forms of identification documents during check-in.\n\n"
-                    . "• <strong>Airport Shuttle:</strong> Complimentary airport pick-up and drop-off services are available based on the flight schedules of Cox's Bazar.\n\n"
-                    . "• <strong>Early/Late Policy:</strong> Generally, early check-in is possible if there is a vacant room available upon arrival. It is necessary to book hotel accommodation 1 day ahead for a guaranteed early check-in.\n\n"
-                    . "• <strong>Complimentary Breakfast:</strong> Complimentary Buffet Breakfast for two (per bedroom) is available at Casablanca Restaurant on the 2nd Floor (7:00 AM - 10:30 AM).\n\n"
-                    . "• <strong>Outside Food:</strong> Outside food, beverages, and alcohol are not allowed.\n\n"
-                    . "• <strong>Pool Costumes:</strong> Guests are requested to wear appropriate synthetic swimming costumes. Men: only synthetic sports shorts; Women: only long synthetic sports leggings and synthetic sports T-shirt. Pool timing: 07:00 AM to 07:00 PM.\n\n"
-                    . "• <strong>Gym:</strong> Gym usage requires a proper dress code and sports shoes, with a maximum of 2 adults per bedroom entitled to 1-hour complimentary use from 7:00 AM to 9:00 PM.\n\n"
-                    . "• <strong>General Restrictions:</strong> Outside guests are not allowed in the room. Sound boxes, loud music, or loud sound are not allowed in the room and hotel premises. Rice cookers or any other electronic items are not allowed. Personal photographers are not allowed.\n\n"
-                    . "• <strong>Driver Accommodation:</strong> No driver accommodation is available at the hotel premise.";
-                
-                update_post_meta( $post_id, '_hotel_policy_house', $house_rules );
+            if ( ! empty( $existing_hotels ) ) {
+                foreach ( $existing_hotels as $hotel ) {
+                    wp_delete_post( $hotel->ID, true );
+                }
             }
+
+            // 2. Define the 10 hotels data array
+            $hotels_data = array(
+                array(
+                    'title'             => "Sea Pearl Beach Resort & Spa",
+                    'price'             => '13500',
+                    'location'          => "Inani Beach, Marine Drive, Cox's Bazar, Bangladesh",
+                    'contact'           => '01844016001',
+                    'rating_location'   => '4.8',
+                    'rating_comfort'    => '4.9',
+                    'rating_facilities' => '4.9',
+                    'reviews_count'     => '342',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Conference Hostess, Garden, Swimming Pool, Gym, Massage, Buffet Lunch, Buffet Dinner, Air Conditioning, Couple Friendly, Water Park, Kids Club',
+                    'nearby_interest'   => "0.1 km from Inani Beach\n4.5 km from Himchori Waterfall\n25.0 km from Kolatoli Beach",
+                    'nearby_terminals'  => "28.0 km from Cox's Bazar Airport\n29.0 km from Cox's Bazar Railway Station",
+                    'check_in'          => '14:00',
+                    'check_out'         => '11:00',
+                    'policy_child'      => "Children under 5 years stay free when sharing room. Children between 5-11 years stay free but require payment for breakfast/activities.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "The rate for an extra bed with breakfast is BDT 3,000 per night.",
+                    'policy_house'      => "• <strong>Pool Attire:</strong> Guests must wear appropriate synthetic swimming costumes in the swimming pools.\n• <strong>Firearms:</strong> Licensed personal firearms are not permitted on resort grounds.\n• <strong>Quiet Hours:</strong> Respect other guests by keeping noise to a minimum after 10:00 PM.",
+                    'content'           => "Sea Pearl Beach Resort & Spa is a premier 5-star luxury resort nestled on Inani Beach, Cox's Bazar. Spanning across 15 acres of manicured gardens, this majestic property offers 493 rooms and suites with spectacular sea and hill views. Enjoy two outdoor swimming pools, a private water park, multiple international restaurants, and a comprehensive wellness spa.",
+                    'excerpt'           => "Nestled on Inani Beach, Sea Pearl offers 5-star oceanfront luxury with a private beach, water park, and infinity pools."
+                ),
+                array(
+                    'title'             => "Ocean Paradise Hotel & Resort",
+                    'price'             => '8500',
+                    'location'          => "Kolatoli Road, Hotel-Motel Zone, Cox's Bazar, Bangladesh",
+                    'contact'           => '09619675675',
+                    'rating_location'   => '4.6',
+                    'rating_comfort'    => '4.5',
+                    'rating_facilities' => '4.5',
+                    'reviews_count'     => '189',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Free Wi-Fi, Swimming Pool, Fitness Center, Room Service, Private Balcony, Breakfast Included, Spa & Wellness, Fine Dining, Bar/Lounge, Couple Friendly, Air Conditioning',
+                    'nearby_interest'   => "0.2 km from Sugondha Beach\n0.5 km from Kolatoli Beach\n4.8 km from Radiant Fish World",
+                    'nearby_terminals'  => "5.0 km from Cox's Bazar Airport\n5.8 km from Cox's Bazar Railway Station",
+                    'check_in'          => '14:00',
+                    'check_out'         => '12:00',
+                    'policy_child'      => "Children under 6 stay free. Children 7 and above are considered adults and will require an extra bed.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed with breakfast is BDT 2,500.",
+                    'policy_house'      => "• <strong>Outside Food:</strong> Outside food, beverages, and alcohol are not allowed.\n• <strong>Social Distancing:</strong> Please maintain social distancing during your stay.",
+                    'content'           => "Ocean Paradise Hotel & Resort is a prominent hospitality destination in the heart of Cox's Bazar's hotel-motel zone. It features modern rooms with panoramic views of the Bay of Bengal, outdoor pools, a fully equipped gym, a therapeutic spa, and multiple dining options including a rooftop sky bar.",
+                    'excerpt'           => "Located on Kolatoli Road, Ocean Paradise provides beautiful sea views, outdoor pools, and premium rooftop dining."
+                ),
+                array(
+                    'title'             => "Sayeman Beach Resort",
+                    'price'             => '12500',
+                    'location'          => "Marine Drive Road, Kolatoli, Cox's Bazar, Bangladesh",
+                    'contact'           => '01712345678',
+                    'rating_location'   => '4.7',
+                    'rating_comfort'    => '4.6',
+                    'rating_facilities' => '4.6',
+                    'reviews_count'     => '215',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Conference Hostess, Garden, Mobile Phone Coverage, Medical Service, Tours/Ticket Assistance, Sofa Bed, Swimming Pool, Gym, Massage, Buffet Lunch, Buffet Dinner, Air Conditioning, Couple Friendly',
+                    'nearby_interest'   => "0.077 km from Kolatoli Beach, Cox's Bazar\n4.4 km from Radiant Fish World\n1.7 km from Sugondha Sea Beach\n2.8 km from Laboni Beach",
+                    'nearby_terminals'  => "4.8 km from Cox's Bazar Airport\n5.6 km from Cox's Bazar Railway Station\n0.35 km from Kolatoli Bus Stand",
+                    'check_in'          => '14:00',
+                    'check_out'         => '12:00',
+                    'policy_child'      => "Two children under the age of 4 years will enjoy a complimentary stay and breakfast. Children aged 5-9 pay BDT 650 for breakfast.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed along with breakfast is BDT 2,600.",
+                    'policy_house'      => "• <strong>Date Changes:</strong> Date change requests must be made 72+ hours prior to arrival.\n• <strong>Pool Costumes:</strong> Men must wear synthetic sports shorts; Women must wear long synthetic sports leggings and synthetic sports T-shirt.",
+                    'content'           => "Sayeman Beach Resort revives its famed legacy of comfort, elegance, and impeccable service first established in 1964. Located at the beachfront location of Marine Drive, Kolatoli, it features an infinity pool overlooking the ocean, private beach access, and Casablanca Restaurant.",
+                    'excerpt'           => "An iconic beachfront landmark on Marine Drive, offering a gorgeous infinity pool and elegant modern design."
+                ),
+                array(
+                    'title'             => "Hotel The Cox Today",
+                    'price'             => '7500',
+                    'location'          => "Kolatoli Road, Hotel-Motel Zone, Cox's Bazar, Bangladesh",
+                    'contact'           => '01755598449',
+                    'rating_location'   => '4.5',
+                    'rating_comfort'    => '4.4',
+                    'rating_facilities' => '4.4',
+                    'reviews_count'     => '156',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Swimming Pool, Gym, Thai Spa, On-site Restaurant, Bar/Lounge, Free Wi-Fi, Room Service, Air Conditioning, Couple Friendly, Valet Parking',
+                    'nearby_interest'   => "0.3 km from Sugondha Beach\n0.7 km from Laboni Beach\n4.5 km from Radiant Fish World",
+                    'nearby_terminals'  => "4.9 km from Cox's Bazar Airport\n5.7 km from Cox's Bazar Railway Station",
+                    'check_in'          => '14:00',
+                    'check_out'         => '12:00',
+                    'policy_child'      => "Children below 5 stay free. Ages 5-11 pay 50% breakfast cost.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed with breakfast is BDT 2,200.",
+                    'policy_house'      => "• <strong>Pool Usage:</strong> Proper synthetic swimwear required.\n• <strong>Smoking:</strong> Permitted in designated outdoor areas only.",
+                    'content'           => "Hotel The Cox Today is a luxury 5-star hotel in Cox's Bazar offering international standards of hospitality. With elegant rooms, a multi-cuisine restaurant, bar, spa, and a central location, it is perfect for both leisure and business travelers.",
+                    'excerpt'           => "Central hotel-motel zone luxury with a large outdoor pool, spa, and comfortable multi-room layouts."
+                ),
+                array(
+                    'title'             => "Long Beach Hotel",
+                    'price'             => '9000',
+                    'location'          => "Kalatali Road, Cox's Bazar, Bangladesh",
+                    'contact'           => '01730338905',
+                    'rating_location'   => '4.6',
+                    'rating_comfort'    => '4.7',
+                    'rating_facilities' => '4.6',
+                    'reviews_count'     => '288',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Indoor Swimming Pool, Gym, Jacuzzi, Billiards, Cozy Restaurant, Sunset BBQ, Free Wi-Fi, Air Conditioning, Couple Friendly, Free Airport Shuttle',
+                    'nearby_interest'   => "0.4 km from Sugondha Beach\n1.2 km from Laboni Beach\n3.5 km from Radiant Fish World",
+                    'nearby_terminals'  => "4.5 km from Cox's Bazar Airport\n5.2 km from Cox's Bazar Railway Station",
+                    'check_in'          => '13:00',
+                    'check_out'         => '11:30',
+                    'policy_child'      => "Children 12 and below stay free without extra bed. Kids above 12 considered adults.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed with buffet breakfast is BDT 2,500.",
+                    'policy_house'      => "• <strong>Check-In Requirements:</strong> Government-issued NID or passport required for all check-ins.\n• <strong>Shuttle:</strong> Inform front desk 24 hours in advance to arrange free shuttle.",
+                    'content'           => "Long Beach Hotel provides a highly rated luxury experience. Nestled in a prime location, it offers the city's only indoor swimming pool, a state-of-the-art fitness center, relaxing spa services, and fine dining restaurants serving local and continental favorites.",
+                    'excerpt'           => "Highly-rated luxury hotel featuring Cox's Bazar's only indoor swimming pool, jacuzzi, and spa."
+                ),
+                array(
+                    'title'             => "Mermaid Beach Resort",
+                    'price'             => '16500',
+                    'location'          => "Pechardi, Marine Drive Road, Cox's Bazar, Bangladesh",
+                    'contact'           => '01841416468',
+                    'rating_location'   => '4.9',
+                    'rating_comfort'    => '4.8',
+                    'rating_facilities' => '4.7',
+                    'reviews_count'     => '195',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Private Beach Access, Swimming Pool, Organic Restaurant, Beach Cabanas, Spa, Free Wi-Fi, Air Conditioning, Couple Friendly, Kayaking',
+                    'nearby_interest'   => "0.01 km from Pechardi Private Beach\n8.5 km from Himchori Waterfall\n15.0 km from Kolatoli Beach",
+                    'nearby_terminals'  => "18.0 km from Cox's Bazar Airport\n19.0 km from Cox's Bazar Railway Station",
+                    'check_in'          => '13:00',
+                    'check_out'         => '11:00',
+                    'policy_child'      => "Children under 5 enjoy a complimentary stay and breakfast. Children above 5 pay BDT 1,200 for breakfast.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed along with buffet breakfast is BDT 3,500.",
+                    'policy_house'      => "• <strong>Eco-Friendly Rules:</strong> Guests are requested to maintain the ecological balance of the resort.\n• <strong>No outside visitors:</strong> Outside visitors are not permitted in rooms.",
+                    'content'           => "Mermaid Beach Resort is a premium eco-friendly boutique resort offering private beach villas and bungalows. Known for its colorful designs, organic food options, and direct private beach access, it offers a peaceful haven away from crowds.",
+                    'excerpt'           => "Boutique eco-resort offering exclusive private beach access, custom-themed villas, and fresh organic dining."
+                ),
+                array(
+                    'title'             => "Windy Terrace Hotel",
+                    'price'             => '5500',
+                    'location'          => "Kolatoli Road, Hotel-Motel Zone, Cox's Bazar, Bangladesh",
+                    'contact'           => '01730434444',
+                    'rating_location'   => '4.4',
+                    'rating_comfort'    => '4.3',
+                    'rating_facilities' => '4.2',
+                    'reviews_count'     => '98',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Infinity Pool, Chandra Dweep Restaurant, Spa, Free Wi-Fi, Air Conditioning, Room Service, Couple Friendly, Free Parking',
+                    'nearby_interest'   => "0.35 km from Sugondha Beach\n0.6 km from Kolatoli Beach\n4.2 km from Radiant Fish World",
+                    'nearby_terminals'  => "5.1 km from Cox's Bazar Airport\n5.9 km from Cox's Bazar Railway Station",
+                    'check_in'          => '14:00',
+                    'check_out'         => '12:30',
+                    'policy_child'      => "Children under 6 stay free when sharing rooms with parents. Older kids pay full breakfast rates.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed is BDT 1,800 per night.",
+                    'policy_house'      => "• <strong>Couples Rule:</strong> Couples may be required to show valid identification documents at check-in.\n• <strong>No alcohol:</strong> Outside alcoholic beverages are not allowed.",
+                    'content'           => "Windy Terrace Hotel is a cozy boutique hotel in Cox's Bazar designed to offer a relaxing, comfortable stay. It features a rooftop infinity pool with sea and hill views, Chandra Dweep restaurant, and relaxing spa facilities.",
+                    'excerpt'           => "Cozy budget-friendly boutique hotel featuring a rooftop pool and easy access to Sugondha Beach."
+                ),
+                array(
+                    'title'             => "Neeshorgo Hotel & Resort",
+                    'price'             => '6800',
+                    'location'          => "Marine Drive Road, Kolatoli, Cox's Bazar, Bangladesh",
+                    'contact'           => '01844057876',
+                    'rating_location'   => '4.7',
+                    'rating_comfort'    => '4.4',
+                    'rating_facilities' => '4.4',
+                    'reviews_count'     => '112',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Rooftop Infinity Pool, Seafood Restaurant, Fitness Gym, Spa & Steam, Free Wi-Fi, Air Conditioning, Room Service, Couple Friendly, Balcony',
+                    'nearby_interest'   => "0.1 km from Kolatoli Beach\n2.5 km from Himchori Waterfall\n3.0 km from Laboni Beach",
+                    'nearby_terminals'  => "5.5 km from Cox's Bazar Airport\n6.3 km from Cox's Bazar Railway Station",
+                    'check_in'          => '14:00',
+                    'check_out'         => '12:00',
+                    'policy_child'      => "Children under 5 years stay free. Kids between 5-9 pay BDT 500 for breakfast.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed is BDT 2,000 per night.",
+                    'policy_house'      => "• <strong>Swimwear:</strong> Appropriate synthetic costumes required for the infinity pool.\n• <strong>No soundboxes:</strong> Loud music or sound systems are not allowed in rooms.",
+                    'content'           => "Neeshorgo Hotel & Resort is situated on the beautiful Marine Drive. It features a gorgeous rooftop infinity pool with stunning 360-degree views of the sea and forest, spacious balconies, a seafood restaurant, and high-quality room service.",
+                    'excerpt'           => "Rooftop infinity pool resort located on Marine Drive, offering scenic hill and ocean balconies."
+                ),
+                array(
+                    'title'             => "Seagull Hotels Ltd.",
+                    'price'             => '8000',
+                    'location'          => "Sugondha Road, Hotel-Motel Zone, Cox's Bazar, Bangladesh",
+                    'contact'           => '01766666530',
+                    'rating_location'   => '4.7',
+                    'rating_comfort'    => '4.5',
+                    'rating_facilities' => '4.5',
+                    'reviews_count'     => '245',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Private Beach Lounge, Large Swimming Pool, Gym, Multiple Restaurants, Bar/Lounge, Free Wi-Fi, Air Conditioning, Couple Friendly, Table Tennis',
+                    'nearby_interest'   => "0.05 km from Sugondha Beach\n0.5 km from Laboni Beach\n4.0 km from Radiant Fish World",
+                    'nearby_terminals'  => "4.7 km from Cox's Bazar Airport\n5.4 km from Cox's Bazar Railway Station",
+                    'check_in'          => '14:00',
+                    'check_out'         => '12:00',
+                    'policy_child'      => "Children under 5 years stay free. Kids 5-11 pay 50% buffet breakfast charge.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed is BDT 2,500.",
+                    'policy_house'      => "• <strong>Swimwear:</strong> Swimming pool use requires proper synthetic costumes.\n• <strong>Loud music:</strong> Sound boxes and speakers are prohibited in rooms.",
+                    'content'           => "Seagull Hotels Ltd. is one of the classic luxury hotels in Cox's Bazar. Located right on Sugondha Beach, it features a private beach lounge, a large outdoor pool, several restaurants serving multi-cuisine dishes, and well-appointed rooms with ocean or hill views.",
+                    'excerpt'           => "One of the classic properties on Sugondha Beach, with a large outdoor pool, gym, and private beach beds."
+                ),
+                array(
+                    'title'             => "Hotel Grand Pacific",
+                    'price'             => '6000',
+                    'location'          => "Kolatoli Road, Cox's Bazar, Bangladesh",
+                    'contact'           => '01777712345',
+                    'rating_location'   => '4.3',
+                    'rating_comfort'    => '4.4',
+                    'rating_facilities' => '4.3',
+                    'reviews_count'     => '78',
+                    'couple_friendly'   => 'yes',
+                    'amenities'         => 'Swimming Pool, Fitness Center, Restaurant, Room Service, Free Wi-Fi, Air Conditioning, Couple Friendly, Free Parking',
+                    'nearby_interest'   => "0.5 km from Sugondha Beach\n0.8 km from Kolatoli Beach\n4.5 km from Radiant Fish World",
+                    'nearby_terminals'  => "5.2 km from Cox's Bazar Airport\n6.0 km from Cox's Bazar Railway Station",
+                    'check_in'          => '14:00',
+                    'check_out'         => '12:00',
+                    'policy_child'      => "Children under 6 stay free. Older kids pay BDT 500 for breakfast.",
+                    'policy_pet'        => 'Not Allowed',
+                    'policy_extra'      => "Extra bed is BDT 2,000.",
+                    'policy_house'      => "• <strong>Check-In ID:</strong> Each guest must present NID copy during check-in.\n• <strong>Outside Food:</strong> Outside food is not allowed in rooms.",
+                    'content'           => "Hotel Grand Pacific is a comfortable, modern hotel on Kolatoli Road. Featuring spacious, air-conditioned rooms, a fitness center, pool, and a multi-cuisine restaurant, it is an excellent and affordable choice for families.",
+                    'excerpt'           => "Comfortable mid-range option on Kolatoli Road with pool, gym, and multi-cuisine family dining."
+                )
+            );
+
+            // 3. Loop and insert posts
+            foreach ( $hotels_data as $hotel ) {
+                $post_id = wp_insert_post( array(
+                    'post_title'   => $hotel['title'],
+                    'post_name'    => sanitize_title( $hotel['title'] ),
+                    'post_content' => $hotel['content'],
+                    'post_excerpt' => $hotel['excerpt'],
+                    'post_status'  => 'publish',
+                    'post_type'    => 'hotel',
+                ) );
+
+                if ( $post_id && ! is_wp_error( $post_id ) ) {
+                    update_post_meta( $post_id, '_hotel_price', $hotel['price'] );
+                    update_post_meta( $post_id, '_hotel_location', $hotel['location'] );
+                    update_post_meta( $post_id, '_hotel_contact', $hotel['contact'] );
+                    update_post_meta( $post_id, '_hotel_rating_location', $hotel['rating_location'] );
+                    update_post_meta( $post_id, '_hotel_rating_comfort', $hotel['rating_comfort'] );
+                    update_post_meta( $post_id, '_hotel_rating_facilities', $hotel['rating_facilities'] );
+                    update_post_meta( $post_id, '_hotel_reviews_count', $hotel['reviews_count'] );
+                    update_post_meta( $post_id, '_hotel_couple_friendly', $hotel['couple_friendly'] );
+                    update_post_meta( $post_id, '_hotel_amenities', $hotel['amenities'] );
+                    
+                    update_post_meta( $post_id, '_hotel_nearby_interest', $hotel['nearby_interest'] );
+                    update_post_meta( $post_id, '_hotel_nearby_terminals', $hotel['nearby_terminals'] );
+                    
+                    update_post_meta( $post_id, '_hotel_check_in', $hotel['check_in'] );
+                    update_post_meta( $post_id, '_hotel_check_out', $hotel['check_out'] );
+                    update_post_meta( $post_id, '_hotel_policy_child', $hotel['policy_child'] );
+                    update_post_meta( $post_id, '_hotel_policy_pet', $hotel['policy_pet'] );
+                    update_post_meta( $post_id, '_hotel_policy_extra', $hotel['policy_extra'] );
+                    update_post_meta( $post_id, '_hotel_policy_house', $hotel['policy_house'] );
+
+                    // Set availability dates
+                    $available_from = date( 'Y-m-d' );
+                    $available_to = date( 'Y-m-d', strtotime( '+2 years' ) );
+                    update_post_meta( $post_id, '_hotel_available_from', $available_from );
+                    update_post_meta( $post_id, '_hotel_available_to', $available_to );
+                }
+            }
+
+            // Save confirmation option so it never runs again
+            update_option( 'travel_venture_coxs_bazar_seeded_v3', true );
         }
     }
 }
