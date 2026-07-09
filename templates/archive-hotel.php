@@ -190,8 +190,11 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                     <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 flex flex-col h-full group">
                         <div class="relative overflow-hidden aspect-w-16 h-60">
                             <?php
-                            $img_url = get_the_post_thumbnail_url( $id, 'large' );
-                            if ( ! $img_url || ( strpos( $img_url, 'localhost' ) !== false && strpos( home_url(), 'localhost' ) === false ) ) {
+                            $img_url = get_post_meta( $id, '_hotel_image_featured_url', true );
+                            if ( empty( $img_url ) ) {
+                                $img_url = get_the_post_thumbnail_url( $id, 'large' );
+                            }
+                            if ( ! $img_url || ( strpos( $img_url, 'localhost' ) === false && strpos( home_url(), 'localhost' ) === false ) ) {
                                 $img_url = 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80';
                             }
                             ?>

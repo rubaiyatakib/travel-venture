@@ -109,23 +109,33 @@ if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is
                 <div class="rounded-3xl overflow-hidden shadow-md aspect-w-16 h-96 sm:h-128 relative bg-slate-900" id="hotel-gallery-slider">
                     <div id="slides-container" class="absolute inset-0">
                         <?php
-                        $gallery = get_post_meta( $id, '_hotel_gallery', true );
-                        $attachment_ids = ! empty( $gallery ) ? explode( ',', $gallery ) : array();
-                        
-                        // Fallback to featured image if no gallery
-                        if ( empty( $attachment_ids ) && has_post_thumbnail() ) {
-                            $attachment_ids[] = get_post_thumbnail_id();
-                        }
-                        
-                        // Render slides
+                        $gallery_meta = get_post_meta( $id, '_hotel_image_gallery_urls', true );
                         $rendered_slides = 0;
-                        if ( ! empty( $attachment_ids ) ) {
-                            foreach ( $attachment_ids as $idx => $attachment_id ) {
-                                $img_url = wp_get_attachment_image_url( $attachment_id, 'large' );
-                                if ( $img_url && ( strpos( $img_url, 'localhost' ) === false || strpos( home_url(), 'localhost' ) !== false ) ) {
-                                    $active_class = ( $rendered_slides === 0 ) ? 'active' : '';
-                                    echo '<div class="gallery-slide ' . esc_attr( $active_class ) . '"><img src="' . esc_url( $img_url ) . '" alt="" class="object-cover w-full h-full"></div>';
-                                    $rendered_slides++;
+                        
+                        if ( ! empty( $gallery_meta ) ) {
+                            $external_gallery = explode( ',', $gallery_meta );
+                            foreach ( $external_gallery as $idx => $img_url ) {
+                                $active_class = ( $rendered_slides === 0 ) ? 'active' : '';
+                                echo '<div class="gallery-slide ' . esc_attr( $active_class ) . '"><img src="' . esc_url( trim( $img_url ) ) . '" alt="" class="object-cover w-full h-full"></div>';
+                                $rendered_slides++;
+                            }
+                        } else {
+                            $gallery = get_post_meta( $id, '_hotel_gallery', true );
+                            $attachment_ids = ! empty( $gallery ) ? explode( ',', $gallery ) : array();
+                            
+                            // Fallback to featured image if no gallery
+                            if ( empty( $attachment_ids ) && has_post_thumbnail() ) {
+                                $attachment_ids[] = get_post_thumbnail_id();
+                            }
+                            
+                            if ( ! empty( $attachment_ids ) ) {
+                                foreach ( $attachment_ids as $idx => $attachment_id ) {
+                                    $img_url = wp_get_attachment_image_url( $attachment_id, 'large' );
+                                    if ( $img_url && ( strpos( $img_url, 'localhost' ) === false || strpos( home_url(), 'localhost' ) !== false ) ) {
+                                        $active_class = ( $rendered_slides === 0 ) ? 'active' : '';
+                                        echo '<div class="gallery-slide ' . esc_attr( $active_class ) . '"><img src="' . esc_url( $img_url ) . '" alt="" class="object-cover w-full h-full"></div>';
+                                        $rendered_slides++;
+                                    }
                                 }
                             }
                         }

@@ -566,16 +566,13 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
             update_option( 'travel_venture_seeded', true );
         }
 
-        /**
-         * Programmatically clean old hotels and seed 10 Cox's Bazar hotels from GoZayaan.
-         */
         public function seed_coxs_bazar_hotels() {
             if ( isset( $_GET['reseed_hotels'] ) && current_user_can( 'manage_options' ) ) {
-                delete_option( 'travel_venture_coxs_bazar_seeded_v3' );
+                delete_option( 'travel_venture_coxs_bazar_seeded_v4' );
             }
 
             // Run only once
-            if ( get_option( 'travel_venture_coxs_bazar_seeded_v3' ) ) {
+            if ( get_option( 'travel_venture_coxs_bazar_seeded_v4' ) ) {
                 return;
             }
 
@@ -604,6 +601,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.9',
                     'reviews_count'     => '342',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80,https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80,https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
                     'amenities'         => 'Conference Hostess, Garden, Swimming Pool, Gym, Massage, Buffet Lunch, Buffet Dinner, Air Conditioning, Couple Friendly, Water Park, Kids Club',
                     'nearby_interest'   => "0.1 km from Inani Beach\n4.5 km from Himchori Waterfall\n25.0 km from Kolatoli Beach",
                     'nearby_terminals'  => "28.0 km from Cox's Bazar Airport\n29.0 km from Cox's Bazar Railway Station",
@@ -626,6 +625,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.5',
                     'reviews_count'     => '189',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1200&q=80,https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1200&q=80,https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=80',
                     'amenities'         => 'Free Wi-Fi, Swimming Pool, Fitness Center, Room Service, Private Balcony, Breakfast Included, Spa & Wellness, Fine Dining, Bar/Lounge, Couple Friendly, Air Conditioning',
                     'nearby_interest'   => "0.2 km from Sugondha Beach\n0.5 km from Kolatoli Beach\n4.8 km from Radiant Fish World",
                     'nearby_terminals'  => "5.0 km from Cox's Bazar Airport\n5.8 km from Cox's Bazar Railway Station",
@@ -648,6 +649,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.6',
                     'reviews_count'     => '215',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80,https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80,https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=80',
                     'amenities'         => 'Conference Hostess, Garden, Mobile Phone Coverage, Medical Service, Tours/Ticket Assistance, Sofa Bed, Swimming Pool, Gym, Massage, Buffet Lunch, Buffet Dinner, Air Conditioning, Couple Friendly',
                     'nearby_interest'   => "0.077 km from Kolatoli Beach, Cox's Bazar\n4.4 km from Radiant Fish World\n1.7 km from Sugondha Sea Beach\n2.8 km from Laboni Beach",
                     'nearby_terminals'  => "4.8 km from Cox's Bazar Airport\n5.6 km from Cox's Bazar Railway Station\n0.35 km from Kolatoli Bus Stand",
@@ -670,6 +673,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.4',
                     'reviews_count'     => '156',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1529290130-4ca3753253ae?w=1200&q=80,https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80',
                     'amenities'         => 'Swimming Pool, Gym, Thai Spa, On-site Restaurant, Bar/Lounge, Free Wi-Fi, Room Service, Air Conditioning, Couple Friendly, Valet Parking',
                     'nearby_interest'   => "0.3 km from Sugondha Beach\n0.7 km from Laboni Beach\n4.5 km from Radiant Fish World",
                     'nearby_terminals'  => "4.9 km from Cox's Bazar Airport\n5.7 km from Cox's Bazar Railway Station",
@@ -692,6 +697,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.6',
                     'reviews_count'     => '288',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80,https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
                     'amenities'         => 'Indoor Swimming Pool, Gym, Jacuzzi, Billiards, Cozy Restaurant, Sunset BBQ, Free Wi-Fi, Air Conditioning, Couple Friendly, Free Airport Shuttle',
                     'nearby_interest'   => "0.4 km from Sugondha Beach\n1.2 km from Laboni Beach\n3.5 km from Radiant Fish World",
                     'nearby_terminals'  => "4.5 km from Cox's Bazar Airport\n5.2 km from Cox's Bazar Railway Station",
@@ -714,6 +721,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.7',
                     'reviews_count'     => '195',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&q=80,https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80,https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=1200&q=80',
                     'amenities'         => 'Private Beach Access, Swimming Pool, Organic Restaurant, Beach Cabanas, Spa, Free Wi-Fi, Air Conditioning, Couple Friendly, Kayaking',
                     'nearby_interest'   => "0.01 km from Pechardi Private Beach\n8.5 km from Himchori Waterfall\n15.0 km from Kolatoli Beach",
                     'nearby_terminals'  => "18.0 km from Cox's Bazar Airport\n19.0 km from Cox's Bazar Railway Station",
@@ -736,6 +745,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.2',
                     'reviews_count'     => '98',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1529290130-4ca3753253ae?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=80,https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80',
                     'amenities'         => 'Infinity Pool, Chandra Dweep Restaurant, Spa, Free Wi-Fi, Air Conditioning, Room Service, Couple Friendly, Free Parking',
                     'nearby_interest'   => "0.35 km from Sugondha Beach\n0.6 km from Kolatoli Beach\n4.2 km from Radiant Fish World",
                     'nearby_terminals'  => "5.1 km from Cox's Bazar Airport\n5.9 km from Cox's Bazar Railway Station",
@@ -758,6 +769,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.4',
                     'reviews_count'     => '112',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80,https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=80',
                     'amenities'         => 'Rooftop Infinity Pool, Seafood Restaurant, Fitness Gym, Spa & Steam, Free Wi-Fi, Air Conditioning, Room Service, Couple Friendly, Balcony',
                     'nearby_interest'   => "0.1 km from Kolatoli Beach\n2.5 km from Himchori Waterfall\n3.0 km from Laboni Beach",
                     'nearby_terminals'  => "5.5 km from Cox's Bazar Airport\n6.3 km from Cox's Bazar Railway Station",
@@ -780,6 +793,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.5',
                     'reviews_count'     => '245',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=80,https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80',
                     'amenities'         => 'Private Beach Lounge, Large Swimming Pool, Gym, Multiple Restaurants, Bar/Lounge, Free Wi-Fi, Air Conditioning, Couple Friendly, Table Tennis',
                     'nearby_interest'   => "0.05 km from Sugondha Beach\n0.5 km from Laboni Beach\n4.0 km from Radiant Fish World",
                     'nearby_terminals'  => "4.7 km from Cox's Bazar Airport\n5.4 km from Cox's Bazar Railway Station",
@@ -802,6 +817,8 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     'rating_facilities' => '4.3',
                     'reviews_count'     => '78',
                     'couple_friendly'   => 'yes',
+                    'image_featured'    => 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80',
+                    'image_gallery'     => 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80,https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=80',
                     'amenities'         => 'Swimming Pool, Fitness Center, Restaurant, Room Service, Free Wi-Fi, Air Conditioning, Couple Friendly, Free Parking',
                     'nearby_interest'   => "0.5 km from Sugondha Beach\n0.8 km from Kolatoli Beach\n4.5 km from Radiant Fish World",
                     'nearby_terminals'  => "5.2 km from Cox's Bazar Airport\n6.0 km from Cox's Bazar Railway Station",
@@ -847,6 +864,10 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
                     update_post_meta( $post_id, '_hotel_policy_pet', $hotel['policy_pet'] );
                     update_post_meta( $post_id, '_hotel_policy_extra', $hotel['policy_extra'] );
                     update_post_meta( $post_id, '_hotel_policy_house', $hotel['policy_house'] );
+                    
+                    // Direct stable image URLs
+                    update_post_meta( $post_id, '_hotel_image_featured_url', $hotel['image_featured'] );
+                    update_post_meta( $post_id, '_hotel_image_gallery_urls', $hotel['image_gallery'] );
 
                     // Set availability dates
                     $available_from = date( 'Y-m-d' );
@@ -857,7 +878,7 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
             }
 
             // Save confirmation option so it never runs again
-            update_option( 'travel_venture_coxs_bazar_seeded_v3', true );
+            update_option( 'travel_venture_coxs_bazar_seeded_v4', true );
         }
     }
 }
