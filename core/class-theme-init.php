@@ -570,6 +570,10 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
          * Programmatically clean old hotels and seed 10 Cox's Bazar hotels from GoZayaan.
          */
         public function seed_coxs_bazar_hotels() {
+            if ( isset( $_GET['reseed_hotels'] ) && current_user_can( 'manage_options' ) ) {
+                delete_option( 'travel_venture_coxs_bazar_seeded_v3' );
+            }
+
             // Run only once
             if ( get_option( 'travel_venture_coxs_bazar_seeded_v3' ) ) {
                 return;
