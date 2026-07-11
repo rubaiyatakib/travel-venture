@@ -1,6 +1,11 @@
 /*
  * TripAzai Preview Mockup CSS
  */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 :root {
     --primary: #0c4ea3;          /* Logo Deep Blue */
@@ -499,21 +504,26 @@ button i,
 
     /* Make the booking card float over background with 20px border radius & soft shadow */
     .search-form-wrapper {
-        margin-top: 1.5rem !important;
-        margin-bottom: -4.5rem !important; /* Overlap/float look */
-        padding-left: 12px !important;
-        padding-right: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
+    /* White Booking Form Card: 20px radius, soft layered shadow, compact margins */
     #search-form-index {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important; /* 2 equal columns */
-        grid-gap: 16px !important; /* Airbnb-style equal spacing gap */
-        padding: 20px !important;
+        grid-gap: 16px !important; /* Premium consistent gap spacing */
+        padding: 22px 16px !important; /* Premium internal padding */
         border-radius: 20px !important; /* 20px border radius */
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important; /* Soft premium shadow */
-        background-color: #ffffff !important;
-        border: 1px solid rgba(226, 232, 240, 0.8) !important;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.03) !important; /* Soft shadow */
+        background-color: rgba(255, 255, 255, 0.98) !important;
+        border: 1px solid rgba(15, 23, 42, 0.08) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     #search-form-index > div:nth-child(1) {
@@ -522,10 +532,14 @@ button i,
 
     #search-form-index > div:nth-child(2) {
         grid-column: span 1 !important; /* Check-in 1 col */
+        min-width: 0 !important;
+        width: 100% !important;
     }
 
     #search-form-index > div:nth-child(3) {
         grid-column: span 1 !important; /* Check-out 1 col */
+        min-width: 0 !important;
+        width: 100% !important;
     }
 
     #search-form-index > div:nth-child(4) {
@@ -534,46 +548,131 @@ button i,
 
     #search-form-index > div:nth-child(5) {
         grid-column: span 2 !important; /* Button takes full width */
-        margin-top: 8px !important;
+        margin-top: 8px !important; /* Clear top spacing */
+        width: 100% !important;
     }
 
-    /* Reduce internal padding of input fields */
+    /* Form spacing and consistent labels */
+    #search-form-index label {
+        display: block !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.06em !important;
+        color: #475569 !important;
+        margin-bottom: 8px !important;
+        text-transform: uppercase !important;
+    }
+
+    /* Standardized input boxes: height 50px, border-radius 10px, clean border */
     #search-form-index input,
     #search-form-index select,
     #rooms-guests-trigger {
-        font-size: 13px !important;
-        padding: 8px 12px !important; /* Reduced internal padding */
-        height: 42px !important;
-        min-height: 42px !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        color: #0f172a !important;
+        background-color: #ffffff !important;
+        height: 50px !important;
+        min-height: 50px !important;
         border-radius: 10px !important;
-        border: 1px solid #e2e8f0 !important;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        border: 1px solid #cbd5e1 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
     }
 
-    /* Smooth hover/tap animation and outline focus effects */
+    /* Icon vertical centering and alignment */
+    #search-form-index .relative {
+        position: relative !important;
+        width: 100% !important;
+    }
+
+    #search-form-index .relative i {
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        pointer-events: none !important;
+        font-size: 14px !important;
+        color: #64748b !important;
+    }
+
+    #search-form-index select {
+        padding-left: 42px !important; /* Proper padding so icon doesn't overlap placeholder */
+        padding-right: 36px !important;
+    }
+
+    #search-form-index .relative i.fa-map-marker-alt {
+        left: 14px !important;
+    }
+
+    #search-form-index .relative i.fa-chevron-down {
+        right: 14px !important;
+        left: auto !important;
+    }
+
+    /* Check-in / Check-out specific padding and calendar icon on the right */
+    #search-form-index input#check_in,
+    #search-form-index input#check_out {
+        padding-left: 16px !important;
+        padding-right: 42px !important;
+    }
+
+    #search-form-index .relative i.fa-calendar-days {
+        right: 14px !important;
+        left: auto !important;
+    }
+
+    /* Active focus effect: refined blue border ring and small tap scale */
     #search-form-index input:focus,
     #search-form-index select:focus,
-    #rooms-guests-trigger:active,
-    #rooms-guests-trigger:focus {
+    #rooms-guests-trigger:focus,
+    #rooms-guests-trigger:active {
+        outline: none !important;
         border-color: #0c4ea3 !important;
         box-shadow: 0 0 0 3px rgba(12, 78, 163, 0.15) !important;
         transform: scale(0.99) !important;
     }
 
-    #rooms-guests-trigger span#rooms-guests-display {
-        font-size: 13px !important;
-    }
-    #rooms-guests-trigger span#rooms-guests-subdisplay {
-        font-size: 9px !important;
+    /* Rooms & guests trigger formatting */
+    #rooms-guests-trigger {
+        padding-left: 16px !important;
+        padding-right: 36px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        text-align: left !important;
     }
 
-    /* Search button styling: 54px height, blue gradient, larger icon, rounded corners */
+    #rooms-guests-trigger span#rooms-guests-display {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        line-height: 1.2 !important;
+    }
+
+    #rooms-guests-trigger span#rooms-guests-subdisplay {
+        font-size: 10px !important;
+        color: #64748b !important;
+        font-weight: 500 !important;
+        line-height: 1.2 !important;
+        margin-top: 2px !important;
+    }
+
+    /* Guests popup max-width safety limit to prevent mobile viewport overflow */
+    #rooms-guests-popup {
+        width: 290px !important;
+        max-width: calc(100vw - 48px) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    /* Search button: 54px height, brand gradient, larger icon, rounded corners */
     #search-form-index button[type="submit"] {
-        height: 54px !important; /* 52-56px height */
+        height: 54px !important;
         min-height: 54px !important;
-        background: linear-gradient(135deg, #004EA1 0%, #7EBCFF 100%) !important; /* Modern blue gradient */
+        background: linear-gradient(135deg, #0c4ea3 0%, #54a8f7 100%) !important; /* Brand Blue Gradient */
         border-radius: 12px !important;
-        font-size: 14px !important;
+        font-size: 15px !important;
         font-weight: 700 !important;
         color: #ffffff !important;
         display: flex !important;
@@ -581,31 +680,37 @@ button i,
         justify-content: center !important;
         transition: all 0.2s ease-in-out !important;
         border: none !important;
+        box-shadow: 0 4px 12px rgba(12, 78, 163, 0.2) !important;
+    }
+
+    #search-form-index button[type="submit"]:hover {
+        background: linear-gradient(135deg, #083b7c 0%, #3b92e1 100%) !important;
+        box-shadow: 0 6px 16px rgba(12, 78, 163, 0.3) !important;
     }
 
     #search-form-index button[type="submit"]:active {
-        transform: scale(0.97) !important;
-        opacity: 0.95 !important;
+        transform: scale(0.98) !important;
+        box-shadow: 0 2px 6px rgba(12, 78, 163, 0.15) !important;
     }
 
     #search-form-index button[type="submit"] i {
-        font-size: 16px !important; /* Larger icon */
+        font-size: 16px !important;
         margin-right: 8px !important;
     }
-    
-    /* Neatly center descriptions */
-    .text-center p {
-        text-align: center !important;
+
+    /* Compact other elements */
+    .glassmorphism {
+        padding: 1.5rem !important;
+        border-radius: 1.5rem !important;
     }
 
-    /* Adjust grid items padding and alignment on mobile for professional look */
+    /* Adjust features grid cards mobile layouts too */
     .grid > div {
         padding: 1.5rem !important;
         align-items: center !important;
         text-align: center !important;
     }
     
-    /* Center the icons and headers in feature cards on mobile */
     .grid > div > div {
         margin-left: auto !important;
         margin-right: auto !important;
@@ -616,24 +721,17 @@ button i,
         width: 100% !important;
     }
 
-    /* Mobile font size and alignment tweaks */
     h2 {
-        font-size: 1.35rem !important; /* Made smaller for neatness */
+        font-size: 1.35rem !important;
         line-height: 1.75rem !important;
         text-align: center !important;
     }
+    
     h3 {
-        font-size: 1.15rem !important; /* Made smaller for neatness */
+        font-size: 1.15rem !important;
         line-height: 1.5rem !important;
     }
-    
-    /* Make body and paragraph text slightly smaller and neatly aligned on mobile */
-    p, .text-slate-500, .text-slate-600 {
-        font-size: 0.85rem !important;
-        line-height: 1.4rem !important;
-    }
 
-    /* Compress tall vertical padding blocks for tight mobile layouts */
     .py-16 {
         padding-top: 2rem !important;
         padding-bottom: 2rem !important;
@@ -645,10 +743,22 @@ button i,
     .pb-48 {
         padding-bottom: 4rem !important;
     }
+}
 
-    .glassmorphism {
-        padding: 1.5rem !important;
-        border-radius: 1.5rem !important;
+/* Specific stack layout on very small viewports (< 360px) to prevent cramping */
+@media (max-width: 359.98px) {
+    #search-form-index {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-gap: 14px !important;
+        padding: 18px 12px !important;
+    }
+    #search-form-index > div {
+        width: 100% !important;
+    }
+    h1 {
+        font-size: 1.65rem !important;
+        line-height: 1.25 !important;
     }
 }
 

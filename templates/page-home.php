@@ -23,9 +23,10 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
         <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
             সেরা রেট নিশ্চিত করতে সরাসরি কক্সবাজারের শীর্ষস্থানীয় হোটেলগুলোর সাথে যোগাযোগ করে বুকিং করুন। কোনো অতিরিক্ত খরচ ছাড়াই উপভোগ করুন ফ্রি আগমনী সকালের নাস্তা এবং বিমানবন্দর বা বাস স্টেশন থেকে সরাসরি হোটেলে পৌঁছানোর ফ্রি প্রাইভেট ট্রান্সফার সুবিধা।
         </p>
-        <!-- Custom Search Panel with Rooms & Guests -->
-        <div class="w-full max-w-5xl mx-auto mt-8 relative z-20 search-form-wrapper">
-            <form action="<?php echo esc_url( $hotel_archive_url ); ?>" method="GET" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end text-left" id="search-form-index">
+    </div>
+    <!-- Custom Search Panel with Rooms & Guests -->
+    <div class="w-full max-w-5xl mx-auto mt-8 relative z-20 search-form-wrapper">
+        <form action="<?php echo esc_url( $hotel_archive_url ); ?>" method="GET" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end text-left" id="search-form-index">
                 
                 <!-- Destination Select -->
                 <div class="space-y-1.5">
@@ -108,7 +109,6 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
 
             </form>
         </div>
-    </div>
 </section>
 
 <!-- Feature Grid -->
