@@ -114,8 +114,8 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
 <!-- Feature Grid -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="text-center space-y-3 mb-12">
-        <h2 class="text-3xl font-bold font-montserrat tracking-tight">কেন ট্রিপাজাই (TripAzai)-এর মাধ্যমে বুক করবেন?</h2>
-        <p class="text-slate-500 max-w-xl mx-auto">কোনো গোপন চার্জ ছাড়াই সরাসরি বুকিংয়ের সুবিধা নিয়ে আমরা আতিথেয়তায় নিয়ে এসেছি নতুন মাত্রা।</p>
+        <h2 class="text-3xl font-normal font-montserrat tracking-tight">কেন TripAzai-এর মাধ্যমে বুক করবেন?</h2>
+        <p class="text-slate-500 max-w-xl mx-auto font-light">কোনো গোপন চার্জ ছাড়াই সরাসরি বুকিংয়ের সুবিধা নিয়ে আমরা আতিথেয়তায় নিয়ে এসেছি নতুন মাত্রা।</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-3 flex flex-col items-start text-left">
@@ -124,8 +124,8 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                 </svg>
             </div>
-            <h3 class="text-lg font-bold">হোটেলের সাথে সরাসরি যোগাযোগ</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">আমরা কোনো বুকিং এজেন্সি বা মধ্যস্থতাকারী ছাড়াই সরাসরি যোগাযোগের সুবিধা প্রদান করি। রিসোর্টের ফ্রন্ট ডেস্কে সরাসরি যোগাযোগ করে সেরা মূল্যে আপনার সুবিধাজনক শর্তে বুকিং নিশ্চিত করুন।</p>
+            <h3 class="text-lg font-normal">হোটেলের সাথে সরাসরি যোগাযোগ</h3>
+            <p class="text-slate-500 text-sm leading-relaxed font-light">আমরা কোনো বুকিং এজেন্সি বা মধ্যস্থতাকারী ছাড়াই সরাসরি যোগাযোগের সুবিধা প্রদান করি। রিসোর্টের ফ্রন্ট ডেস্কে সরাসরি যোগাযোগ করে সেরা মূল্যে আপনার সুবিধাজনক শর্তে বুকিং নিশ্চিত করুন।</p>
         </div>
         <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-3 flex flex-col items-start text-left">
             <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl font-bold mb-2">
@@ -133,8 +133,8 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
                 </svg>
             </div>
-            <h3 class="text-lg font-bold">ফ্রি আগমনী সকালের নাস্তা</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">সমুদ্র সৈকতে উষ্ণ অভ্যর্থনার মাধ্যমে আপনার ছুটি শুরু হোক। ট্রিপাজাইয়ের মাধ্যমে বুক করা প্রতিটি অতিথি তাঁদের পৌঁছানোর প্রথম সকালে পাবেন সম্পূর্ণ নাস্তা বিনামূল্যে।</p>
+            <h3 class="text-lg font-normal">ফ্রি আগমনী সকালের নাস্তা</h3>
+            <p class="text-slate-500 text-sm leading-relaxed font-light">সমুদ্র সৈকতে উষ্ণ অভ্যর্থনার মাধ্যমে আপনার ছুটি শুরু হোক। ট্রিপাজাইয়ের মাধ্যমে বুক করা প্রতিটি অতিথি তাঁদের পৌঁছানোর প্রথম সকালে পাবেন সম্পূর্ণ নাস্তা বিনামূল্যে।</p>
         </div>
         <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-3 flex flex-col items-start text-left">
             <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl font-bold mb-2">
@@ -142,8 +142,8 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17a2 2 0 11-4 0 2 2 0 014 0zM18 17a2 2 0 11-4 0 2 2 0 014 0zM2 6h14a2 2 0 012 2v8a2 2 0 01-2 2H2V6zM18 13h4M18 9h4"></path>
                 </svg>
             </div>
-            <h3 class="text-lg font-bold">ফ্রি স্টেশন/এয়ারপোর্ট ট্রান্সফার</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">যাতায়াতের বাড়তি চিন্তা ও অতিরিক্ত খরচকে বলুন বিদায়। কক্সবাজারের যেকোনো বাস স্টেশন বা বিমানবন্দর থেকে সরাসরি আপনার হোটেলের গেট পর্যন্ত আমরা দিচ্ছি ফ্রি প্রাইভেট শাটল সুবিধা।</p>
+            <h3 class="text-lg font-normal">ফ্রি স্টেশন/এয়ারপোর্ট ট্রান্সফার</h3>
+            <p class="text-slate-500 text-sm leading-relaxed font-light">যাতায়াতের বাড়তি চিন্তা ও অতিরিক্ত খরচকে বলুন বিদায়। কক্সবাজারের যেকোনো বাস স্টেশন বা বিমানবন্দর থেকে সরাসরি আপনার হোটেলের গেট পর্যন্ত আমরা দিচ্ছি ফ্রি প্রাইভেট শাটল সুবিধা।</p>
         </div>
     </div>
 </section>
