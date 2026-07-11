@@ -3,11 +3,14 @@
  */
 
 :root {
-    --primary: #0077b6;
-    --primary-hover: #0096c7;
-    --secondary: #d97706;
+    --primary: #0c4ea3;          /* Logo Deep Blue */
+    --primary-hover: #083b7c;    /* Darker Deep Blue for hovers */
+    --secondary: #faa31b;        /* Logo Golden-Orange */
+    --secondary-hover: #d6870f;
+    --sky-blue: #54a8f7;         /* Logo Sky Blue */
+    --sky-blue-hover: #3b92e1;
     --dark: #0f172a;
-    --light: #f8fafc;
+    --light: #faf9f6;            /* Cream/Ivory backdrop tint */
 }
 
 /* Glassmorphism Styles */
@@ -101,7 +104,7 @@ button[class*="bg-teal-"],
 a[class*="bg-gradient-"],
 button[class*="bg-gradient-"] {
     color: #ffffff !important;
-    background-color: var(--primary, #0077b6) !important;
+    background-color: var(--primary, #0c4ea3) !important;
     border: none;
     border-radius: 9999px;
     font-weight: 600;
@@ -118,7 +121,7 @@ a[class*="bg-teal-"]:hover,
 button[class*="bg-teal-"]:hover,
 a[class*="bg-gradient-"]:hover,
 button[class*="bg-gradient-"]:hover {
-    background-color: var(--primary-hover, #0096c7) !important;
+    background-color: var(--primary-hover, #083b7c) !important;
     color: #ffffff !important;
     opacity: 0.95;
 }
@@ -215,7 +218,7 @@ section form option,
     font-family: 'Inter', sans-serif !important;
 }
 .flatpickr-months {
-    background: #0077b6 !important;
+    background: var(--primary) !important;
     color: #ffffff !important;
     padding: 10px 0 !important;
 }
@@ -227,14 +230,14 @@ section form option,
 }
 .flatpickr-months .flatpickr-prev-month:hover,
 .flatpickr-months .flatpickr-next-month:hover {
-    color: #ccfbf1 !important;
+    color: #bae6fd !important;
 }
 .flatpickr-current-month {
     color: #ffffff !important;
     font-weight: 600 !important;
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months {
-    background: #0077b6 !important;
+    background: var(--primary) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     border: none !important;
@@ -247,13 +250,13 @@ section form option,
     border-top-color: #ffffff !important;
 }
 .flatpickr-weekdays {
-    background: #0077b6 !important;
+    background: var(--primary) !important;
     padding: 2px 0 6px 0 !important;
 }
 span.flatpickr-weekday {
     color: rgba(255, 255, 255, 0.8) !important;
     font-weight: 600 !important;
-    background: #0077b6 !important;
+    background: var(--primary) !important;
 }
 .flatpickr-days {
     padding: 8px !important;
@@ -268,25 +271,25 @@ span.flatpickr-weekday {
     background: #f1f5f9 !important;
 }
 .flatpickr-day.today {
-    border-color: #0077b6 !important;
-    color: #0077b6 !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
     font-weight: 700 !important;
 }
 .flatpickr-day.today:hover {
-    background: #0077b6 !important;
+    background: var(--primary) !important;
     color: #ffffff !important;
 }
 .flatpickr-day.selected, 
 .flatpickr-day.startRange, 
 .flatpickr-day.endRange {
-    background: #0077b6 !important;
-    border-color: #0077b6 !important;
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
 }
 .flatpickr-day.inRange {
-    background: #ccfbf1 !important;
-    color: #0077b6 !important;
+    background: #bae6fd !important;
+    color: var(--primary) !important;
     border-color: transparent !important;
 }
 .flatpickr-day.flatpickr-disabled, 
@@ -323,7 +326,7 @@ span.flatpickr-weekday {
 .text-teal-800,
 .group-hover\:text-teal-600:hover, 
 .group:hover .group-hover\:text-teal-600 {
-    color: var(--primary, #0077b6) !important;
+    color: var(--primary, #0c4ea3) !important;
 }
 .bg-teal-50, 
 .bg-teal-100 {
@@ -334,23 +337,23 @@ span.flatpickr-weekday {
 .bg-teal-800,
 .hover\:bg-teal-700:hover,
 .hover\:bg-teal-800:hover {
-    background-color: var(--primary, #0077b6) !important;
+    background-color: var(--primary, #0c4ea3) !important;
 }
 .border-teal-100, 
 .border-teal-200 {
     border-color: #bae6fd !important; /* Light sky blue border */
 }
 .focus\:ring-teal-500:focus {
-    --tw-ring-color: var(--primary, #0077b6) !important;
+    --tw-ring-color: var(--primary, #0c4ea3) !important;
 }
 .bg-gradient-to-r.from-teal-600 {
-    --tw-gradient-from: #0077b6 !important;
-    --tw-gradient-to: #0096c7 !important;
+    --tw-gradient-from: var(--primary) !important;
+    --tw-gradient-to: var(--sky-blue) !important;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 .bg-gradient-to-r.from-teal-500 {
-    --tw-gradient-from: #0096c7 !important;
-    --tw-gradient-to: #00b4d8 !important;
+    --tw-gradient-from: var(--sky-blue) !important;
+    --tw-gradient-to: var(--primary) !important;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 
@@ -379,8 +382,19 @@ button i,
 .bg-slate-950 {
     background-color: rgba(10, 21, 43, var(--tw-bg-opacity, 1)) !important; /* Ultra Dark Navy */
 }
+.bg-slate-100 {
+    background-color: #f5f2eb !important;
+}
 .bg-slate-50 {
-    background-color: rgba(248, 250, 252, var(--tw-bg-opacity, 1)) !important;
+    background-color: #faf8f5 !important;
+}
+
+/* Override all primary buttons and gradients to match logo color scheme */
+.bg-gradient-to-r.from-blue-600.to-sky-500 {
+    background-image: linear-gradient(to right, var(--primary), var(--sky-blue)) !important;
+}
+.bg-gradient-to-r.from-blue-600.to-sky-500:hover {
+    background-image: linear-gradient(to right, var(--primary-hover), var(--sky-blue-hover)) !important;
 }
 .text-slate-300 {
     color: #cbd5e1 !important;

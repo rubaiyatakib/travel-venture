@@ -20,9 +20,9 @@
     
     <style id="tripazai-customizer-css">
         :root {
-            --primary-color: <?php echo esc_attr( get_theme_mod( 'primary_color', '#1e293b' ) ); ?>;
-            --secondary-color: <?php echo esc_attr( get_theme_mod( 'secondary_color', '#d97706' ) ); ?>;
-            --bg-color: <?php echo esc_attr( get_theme_mod( 'background_color', '#f8fafc' ) ); ?>;
+            --primary-color: <?php echo esc_attr( get_theme_mod( 'primary_color', '#0c4ea3' ) ); ?>;
+            --secondary-color: <?php echo esc_attr( get_theme_mod( 'secondary_color', '#faa31b' ) ); ?>;
+            --bg-color: <?php echo esc_attr( get_theme_mod( 'background_color', '#faf9f6' ) ); ?>;
             --font-headings: "<?php echo esc_attr( get_theme_mod( 'headings_font', 'Outfit' ) ); ?>", "Hind Siliguri", sans-serif;
             --font-body: "<?php echo esc_attr( get_theme_mod( 'body_font', 'Inter' ) ); ?>", "Hind Siliguri", sans-serif;
         }

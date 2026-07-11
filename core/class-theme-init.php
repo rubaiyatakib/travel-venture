@@ -196,7 +196,7 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
 
             // Primary Color setting & control
             $wp_customize->add_setting( 'primary_color', array(
-                'default'           => '#1e293b',
+                'default'           => '#0c4ea3',
                 'sanitize_callback' => 'sanitize_hex_color',
                 'transport'         => 'refresh',
             ) );
@@ -208,7 +208,7 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
 
             // Secondary Color setting & control
             $wp_customize->add_setting( 'secondary_color', array(
-                'default'           => '#d97706',
+                'default'           => '#faa31b',
                 'sanitize_callback' => 'sanitize_hex_color',
                 'transport'         => 'refresh',
             ) );
@@ -220,7 +220,7 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
 
             // Background Color setting & control
             $wp_customize->add_setting( 'background_color', array(
-                'default'           => '#f8fafc',
+                'default'           => '#faf9f6',
                 'sanitize_callback' => 'sanitize_hex_color',
                 'transport'         => 'refresh',
             ) );
