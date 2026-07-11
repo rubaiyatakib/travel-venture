@@ -1017,10 +1017,83 @@ function initRoomsGuestsSelector() {
     renderRooms();
 }
 
+function initCustomLocationSelector() {
+    const trigger = document.getElementById('location-trigger');
+    const dropdown = document.getElementById('location-custom-dropdown');
+    const display = document.getElementById('location-display');
+    const nativeSelect = document.getElementById('location');
+    
+    if (!trigger || !dropdown || !nativeSelect) return;
+    
+    // Toggle dropdown open/close with animation
+    trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (dropdown.classList.contains('hidden')) {
+            // Open
+            dropdown.classList.remove('hidden');
+            // Force a reflow/repaint to trigger CSS transition
+            dropdown.offsetHeight;
+            dropdown.classList.remove('scale-95', 'opacity-0');
+            dropdown.classList.add('scale-100', 'opacity-100');
+            trigger.classList.add('border-primary-color');
+        } else {
+            closeDropdown();
+        }
+    });
+    
+    function closeDropdown() {
+        dropdown.classList.remove('scale-100', 'opacity-100');
+        dropdown.classList.add('scale-95', 'opacity-0');
+        trigger.classList.remove('border-primary-color');
+        
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+            if (dropdown.classList.contains('opacity-0')) {
+                dropdown.classList.add('hidden');
+            }
+        }, 200);
+    }
+    
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+    
+    // Select option logic
+    const options = dropdown.querySelectorAll('.location-option');
+    options.forEach(opt => {
+        opt.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const val = opt.getAttribute('data-value');
+            const label = opt.querySelector('span').textContent;
+            
+            // Set native select and trigger change event
+            nativeSelect.value = val;
+            nativeSelect.dispatchEvent(new Event('change'));
+            
+            // Update display
+            display.textContent = label;
+            
+            closeDropdown();
+        });
+    });
+    
+    // Set initial display if select is preselected
+    if (nativeSelect.value) {
+        const matchingOpt = Array.from(options).find(opt => opt.getAttribute('data-value') === nativeSelect.value);
+        if (matchingOpt) {
+            display.textContent = matchingOpt.querySelector('span').textContent;
+        }
+    }
+}
+
 // Auto-run controllers based on route markers
 document.addEventListener('DOMContentLoaded', function() {
     initExplorer();
     initDetails();
     initFlatpickr();
     initRoomsGuestsSelector();
+    initCustomLocationSelector();
 });
