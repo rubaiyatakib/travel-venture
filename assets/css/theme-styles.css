@@ -456,35 +456,68 @@ button i,
  * Mobile & Tablet Optimization Media Queries
  */
 @media (max-width: 767.98px) {
-    /* Optimize large header text-wrap & sizing on mobile views */
+    /* Mobile font size and alignment tweaks */
     h1 {
-        font-size: 1.875rem !important; /* 30px */
-        line-height: 2.25rem !important;
+        font-size: 1.65rem !important; /* Made smaller for neatness */
+        line-height: 2.15rem !important;
+        text-align: center !important;
     }
     h2 {
-        font-size: 1.5rem !important; /* 24px */
-        line-height: 2rem !important;
+        font-size: 1.35rem !important; /* Made smaller for neatness */
+        line-height: 1.75rem !important;
+        text-align: center !important;
     }
     h3 {
-        font-size: 1.25rem !important; /* 20px */
-        line-height: 1.75rem !important;
+        font-size: 1.15rem !important; /* Made smaller for neatness */
+        line-height: 1.5rem !important;
+    }
+    
+    /* Make body and paragraph text slightly smaller and neatly aligned on mobile */
+    p, .text-slate-500, .text-slate-600 {
+        font-size: 0.85rem !important;
+        line-height: 1.4rem !important;
+    }
+    
+    /* Neatly center section descriptions */
+    .text-center p {
+        text-align: center !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+    
+    /* Adjust grid items padding and alignment on mobile for professional look */
+    .grid > div {
+        padding: 1.5rem !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    /* Center the icons and headers in feature cards on mobile */
+    .grid > div > div {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    .grid > div h3 {
+        text-align: center !important;
+        width: 100% !important;
     }
 
     /* Compress tall vertical padding blocks for tight mobile layouts */
     .py-16 {
-        padding-top: 2.5rem !important;
-        padding-bottom: 2.5rem !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
     }
     .py-24 {
-        padding-top: 3.5rem !important;
-        padding-bottom: 3.5rem !important;
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
     }
     .pb-48 {
-        padding-bottom: 5rem !important;
+        padding-bottom: 4rem !important;
     }
     section.pt-24.pb-48 {
-        padding-top: 3.5rem !important;
-        padding-bottom: 5rem !important;
+        padding-top: 3rem !important;
+        padding-bottom: 4rem !important;
     }
 
     /* Padding adjustments for compact form and card structures */
@@ -517,4 +550,21 @@ button i,
 /* Ensure Bengali thin weight renders correctly */
 .font-light {
     font-weight: 300 !important;
+}
+
+/* Click for Booking button branding colors */
+.homepage-booking-btn,
+#details-booking-btn {
+    background-color: #FEAA1A !important;
+    background-image: none !important;
+    color: #020617 !important;
+    border: none !important;
+    font-weight: 700 !important;
+}
+
+.homepage-booking-btn:hover,
+#details-booking-btn:hover {
+    background-color: #e59512 !important;
+    background-image: none !important;
+    color: #020617 !important;
 }
