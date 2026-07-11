@@ -805,6 +805,24 @@ button i,
 
 /* Custom Destination Dropdown Animation styles */
 #location-custom-dropdown {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    max-height: 280px !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    padding: 6px 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(100, 116, 139, 0.20) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12), 0 3px 8px rgba(15, 23, 42, 0.05) !important;
+    box-sizing: border-box !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(100, 116, 139, 0.35) transparent !important;
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 #location-custom-dropdown.scale-95.opacity-0 {
@@ -814,6 +832,13 @@ button i,
 #location-custom-dropdown.scale-100.opacity-100 {
     transform: scale(1) translateY(0) !important;
     opacity: 1 !important;
+}
+#location-custom-dropdown::-webkit-scrollbar {
+    width: 6px !important;
+}
+#location-custom-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(100, 116, 139, 0.35) !important;
+    border-radius: 999px !important;
 }
 
 /* Hide native select accessibility-safely */
@@ -829,8 +854,85 @@ button i,
     border: 0 !important;
 }
 
-/* Custom Location trigger focus border highlight */
+/* Custom Location trigger reset styling */
+#location-trigger {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    font-weight: 500 !important;
+    transform: none !important;
+}
+#location-trigger:hover {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+}
 #location-trigger.border-primary-color {
     border-color: #0c4ea3 !important;
     box-shadow: 0 0 0 3px rgba(12, 78, 163, 0.15) !important;
+}
+
+/* Reset button styling for dropdown option items */
+.tripazai-hero-booking .tripazai-destination-dropdown [role="option"] {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background-image: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    transform: none !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 16px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.45 !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+}
+
+.tripazai-hero-booking .tripazai-destination-dropdown [role="option"] + [role="option"] {
+    border-top: 1px solid rgba(100, 116, 139, 0.10) !important;
+}
+
+.tripazai-hero-booking .tripazai-destination-dropdown [role="option"]:hover,
+.tripazai-hero-booking .tripazai-destination-dropdown [role="option"]:focus-visible {
+    background: rgba(15, 23, 42, 0.04) !important;
+    color: #1f2937 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.tripazai-hero-booking .tripazai-destination-dropdown [role="option"][aria-selected="true"] {
+    background: rgba(23, 104, 181, 0.08) !important;
+    color: #174f8f !important;
+    font-weight: 600 !important;
+}
+
+/* Stacking context fixes to prevent overlapping */
+#search-form-index > div:nth-child(1) {
+    position: relative !important;
+    z-index: 40 !important;
+}
+#search-form-index > div:nth-child(2),
+#search-form-index > div:nth-child(3),
+#search-form-index > div:nth-child(4),
+#search-form-index > div:nth-child(5) {
+    position: relative !important;
+    z-index: 10 !important;
 }

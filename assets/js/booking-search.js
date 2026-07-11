@@ -858,6 +858,26 @@ function initRoomsGuestsSelector() {
     // Toggle popup open/close
     trigger.addEventListener('click', function(e) {
         if (e.target.closest('#rooms-guests-popup')) return;
+        
+        // Close Destination dropdown if open
+        const destDropdown = document.getElementById('location-custom-dropdown');
+        const destTrigger = document.getElementById('location-trigger');
+        const destChevron = destTrigger ? destTrigger.querySelector('.fa-chevron-down') : null;
+        if (destDropdown && !destDropdown.classList.contains('hidden')) {
+            destDropdown.classList.remove('scale-100', 'opacity-100');
+            destDropdown.classList.add('scale-95', 'opacity-0');
+            if (destTrigger) {
+                destTrigger.setAttribute('aria-expanded', 'false');
+                destTrigger.classList.remove('border-primary-color');
+            }
+            if (destChevron) destChevron.classList.remove('rotate-180');
+            setTimeout(() => {
+                if (destDropdown.classList.contains('opacity-0')) {
+                    destDropdown.classList.add('hidden');
+                }
+            }, 200);
+        }
+
         popup.classList.toggle('hidden');
     });
     
@@ -1038,22 +1058,13 @@ function initCustomLocationDropdown() {
         const optionBtn = document.createElement('button');
         optionBtn.type = 'button';
         optionBtn.role = 'option';
-        optionBtn.className = 'w-full text-left px-4 py-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors text-sm font-semibold text-slate-800 flex items-center border-none bg-transparent';
+        optionBtn.className = 'w-full text-left px-4 py-3 hover:bg-slate-50 cursor-pointer transition-colors text-sm font-normal text-slate-800 flex items-center border-none bg-transparent';
         optionBtn.setAttribute('data-value', value);
         optionBtn.setAttribute('aria-selected', option.selected ? 'true' : 'false');
-        
-        // Icon matching
-        const icon = document.createElement('i');
-        if (value === '') {
-            icon.className = 'fa-solid fa-earth-americas text-slate-400 mr-3 text-sm';
-        } else {
-            icon.className = 'fa-solid fa-location-dot text-slate-400 mr-3 text-sm';
-        }
         
         const span = document.createElement('span');
         span.textContent = text;
         
-        optionBtn.appendChild(icon);
         optionBtn.appendChild(span);
         container.appendChild(optionBtn);
         
@@ -1106,6 +1117,10 @@ function initCustomLocationDropdown() {
     });
     
     function openDropdown() {
+        // Close Rooms & Guests popup if open
+        const roomsPopup = document.getElementById('rooms-guests-popup');
+        if (roomsPopup) roomsPopup.classList.add('hidden');
+
         dropdown.classList.remove('hidden');
         // Force a reflow/repaint to trigger CSS transition
         dropdown.offsetHeight;
@@ -1137,6 +1152,18 @@ function initCustomLocationDropdown() {
             closeDropdown();
         }
     });
+
+    // Close when Check-in or Check-out are focused/clicked
+    const checkInInput = document.getElementById('check_in');
+    const checkOutInput = document.getElementById('check_out');
+    if (checkInInput) {
+        checkInInput.addEventListener('focus', closeDropdown);
+        checkInInput.addEventListener('click', closeDropdown);
+    }
+    if (checkOutInput) {
+        checkOutInput.addEventListener('focus', closeDropdown);
+        checkOutInput.addEventListener('click', closeDropdown);
+    }
     
     // Keyboard navigation
     trigger.addEventListener('keydown', function(e) {
