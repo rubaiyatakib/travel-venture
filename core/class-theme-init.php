@@ -290,6 +290,7 @@ if ( ! class_exists( 'Travel_Venture_Init' ) ) {
             if ( $body_font !== $headings_font ) {
                 $fonts[] = $body_font;
             }
+            $fonts[] = 'Hind Siliguri'; // Support professional Bengali typography
 
             $query_args = array(
                 'family'  => urlencode( implode( '|', array_map( function( $font ) {
