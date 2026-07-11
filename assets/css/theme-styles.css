@@ -499,3 +499,8 @@ button i,
         padding-bottom: 7rem !important;
     }
 }
+
+/* Ensure Bengali thin weight renders correctly */
+.font-light {
+    font-weight: 300 !important;
+}

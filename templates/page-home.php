@@ -21,7 +21,7 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
             Find Your Next <span class="bg-gradient-to-r from-teal-400 to-emerald-300 bg-clip-text text-transparent">Luxury Escape</span>
         </h1>
         <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
-            Book directly with top Cox's Bazar hotels to secure the best rates. Enjoy a complimentary arrival breakfast and a free private transfer from the airport or station at no extra cost.
+            সেরা রেট নিশ্চিত করতে সরাসরি কক্সবাজারের শীর্ষস্থানীয় হোটেলগুলোর সাথে যোগাযোগ করে বুকিং করুন। কোনো অতিরিক্ত খরচ ছাড়াই উপভোগ করুন ফ্রি আগমনী সকালের নাস্তা এবং বিমানবন্দর বা বাস স্টেশন থেকে সরাসরি হোটেলে পৌঁছানোর ফ্রি প্রাইভেট ট্রান্সফার সুবিধা।
         </p>
         <!-- Custom Search Panel with Rooms & Guests -->
         <div class="w-full max-w-5xl mx-auto mt-8 relative z-20">
