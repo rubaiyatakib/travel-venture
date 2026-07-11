@@ -461,28 +461,7 @@ button i,
     display: inline-block !important;
 }
 
-/* Location Custom Dropdown Transition styles */
-#location-custom-dropdown {
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-#location-custom-dropdown.scale-95.opacity-0 {
-    transform: scale(0.95) translateY(-8px) !important;
-    opacity: 0 !important;
-}
-#location-custom-dropdown.scale-100.opacity-100 {
-    transform: scale(1) translateY(0) !important;
-    opacity: 1 !important;
-}
 
-/* General styling for Custom Location Trigger */
-#location-trigger {
-    transition: all 0.2s ease-in-out !important;
-}
-#location-trigger:focus,
-#location-trigger:active {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(12, 78, 163, 0.15) !important;
-}
 
 /* 
  * Mobile & Tablet Optimization Media Queries
@@ -526,16 +505,15 @@ button i,
         padding-right: 12px !important;
     }
 
-    /* Booking.com Mobile same-to-same bright yellow search card style */
     #search-form-index {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important; /* 2 equal columns */
-        grid-gap: 8px !important; /* Tight spacing gaps like Booking.com */
-        padding: 12px !important; /* Yellow margin padding */
-        border-radius: 16px !important; /* Rounded card */
-        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18) !important; /* Soft deep shadow */
-        background-color: #FEAA1A !important; /* Booking.com yellow-orange background */
-        border: 4px solid #FEAA1A !important; /* Solid yellow-orange frame */
+        grid-gap: 16px !important; /* Airbnb-style equal spacing gap */
+        padding: 20px !important;
+        border-radius: 20px !important; /* 20px border radius */
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important; /* Soft premium shadow */
+        background-color: #ffffff !important;
+        border: 1px solid rgba(226, 232, 240, 0.8) !important;
     }
 
     #search-form-index > div:nth-child(1) {
@@ -556,111 +534,68 @@ button i,
 
     #search-form-index > div:nth-child(5) {
         grid-column: span 2 !important; /* Button takes full width */
-        margin-top: 4px !important;
+        margin-top: 8px !important;
     }
 
-    /* Hide labels on mobile for Booking.com look */
-    #search-form-index label {
-        display: none !important;
-    }
-
-    /* Clean white inputs identical to Booking.com Mobile */
+    /* Reduce internal padding of input fields */
     #search-form-index input,
     #search-form-index select,
-    #rooms-guests-trigger,
-    #location-trigger {
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        color: #1a1a1a !important;
-        background-color: #ffffff !important;
-        padding: 10px 12px 10px 36px !important; /* Space for icons */
-        height: 52px !important;
-        min-height: 52px !important;
-        border-radius: 8px !important;
-        border: 1px solid #ffffff !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        text-align: left !important;
-        box-shadow: none !important;
+    #rooms-guests-trigger {
+        font-size: 13px !important;
+        padding: 8px 12px !important; /* Reduced internal padding */
+        height: 42px !important;
+        min-height: 42px !important;
+        border-radius: 10px !important;
+        border: 1px solid #e2e8f0 !important;
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
-    /* Keep text weight same inside inputs */
-    #location-trigger span#location-display,
-    #rooms-guests-trigger span#rooms-guests-display {
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        color: #1a1a1a !important;
-    }
-
-    #rooms-guests-trigger span#rooms-guests-subdisplay {
-        font-size: 10px !important;
-        color: #64748b !important;
-        font-weight: 400 !important;
-        margin-top: 1px !important;
-    }
-
-    /* Reset absolute icons to align vertically inside the new inputs */
-    #search-form-index .relative i,
-    #rooms-guests-trigger i.fa-user,
-    #location-trigger i.fa-map-marker-alt {
-        position: absolute !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        color: #4a4a4a !important;
-        font-size: 16px !important;
-        left: 12px !important;
-        right: auto !important;
-    }
-
-    #search-form-index .relative i.fa-chevron-down {
-        right: 12px !important;
-        left: auto !important;
-        font-size: 11px !important;
-        color: #888888 !important;
-    }
-
-    /* Active border highlight same as Booking.com */
+    /* Smooth hover/tap animation and outline focus effects */
     #search-form-index input:focus,
     #search-form-index select:focus,
-    #location-trigger:focus,
-    #rooms-guests-trigger:focus,
-    #location-trigger.border-primary-color {
-        outline: none !important;
-        border: 2px solid #003580 !important; /* Focused blue border like Booking.com */
-        transform: none !important;
+    #rooms-guests-trigger:active,
+    #rooms-guests-trigger:focus {
+        border-color: #0c4ea3 !important;
+        box-shadow: 0 0 0 3px rgba(12, 78, 163, 0.15) !important;
+        transform: scale(0.99) !important;
     }
 
-    /* Search button: bright blue with 52px height and rounded corners */
+    #rooms-guests-trigger span#rooms-guests-display {
+        font-size: 13px !important;
+    }
+    #rooms-guests-trigger span#rooms-guests-subdisplay {
+        font-size: 9px !important;
+    }
+
+    /* Search button styling: 54px height, blue gradient, larger icon, rounded corners */
     #search-form-index button[type="submit"] {
-        height: 52px !important;
-        min-height: 52px !important;
-        background-color: #003580 !important; /* Booking.com deep blue */
-        background-image: none !important;
-        border-radius: 8px !important;
-        font-size: 16px !important;
+        height: 54px !important; /* 52-56px height */
+        min-height: 54px !important;
+        background: linear-gradient(135deg, #004EA1 0%, #7EBCFF 100%) !important; /* Modern blue gradient */
+        border-radius: 12px !important;
+        font-size: 14px !important;
         font-weight: 700 !important;
         color: #ffffff !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        transition: all 0.2s ease-in-out !important;
         border: none !important;
-        cursor: pointer !important;
-        transition: background-color 0.15s ease-in-out !important;
     }
 
-    #search-form-index button[type="submit"]:hover,
     #search-form-index button[type="submit"]:active {
-        background-color: #00224f !important;
-        transform: scale(0.98) !important;
+        transform: scale(0.97) !important;
+        opacity: 0.95 !important;
     }
 
     #search-form-index button[type="submit"] i {
-        font-size: 18px !important; /* Larger magnifying icon */
+        font-size: 16px !important; /* Larger icon */
         margin-right: 8px !important;
+    }
+    
+    /* Neatly center descriptions */
+    .text-center p {
+        text-align: center !important;
     }
 
     /* Adjust grid items padding and alignment on mobile for professional look */

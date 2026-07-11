@@ -28,16 +28,10 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
             <form action="<?php echo esc_url( $hotel_archive_url ); ?>" method="GET" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end text-left" id="search-form-index">
                 
                 <!-- Destination Select -->
-                <div class="space-y-1.5 relative select-none">
-                    <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Destination</label>
+                <div class="space-y-1.5">
+                    <label for="location" class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Destination</label>
                     <div class="relative flex items-center">
-                        <div id="location-trigger" class="w-full pl-10 pr-8 py-3 rounded-xl border border-slate-200 text-sm bg-white text-slate-800 cursor-pointer min-h-[46px] flex items-center shadow-sm relative">
-                            <span id="location-display" class="font-semibold text-slate-800">Any Destination</span>
-                            <i class="fas fa-map-marker-alt absolute left-3.5 text-slate-400 text-sm"></i>
-                            <i class="fas fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
-                        </div>
-                        
-                        <select id="location" name="location" class="hidden">
+                        <select id="location" name="location" class="w-full pl-10 pr-8 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all appearance-none bg-white text-slate-800">
                             <option value="">Any Destination</option>
                             <?php
                             $unique_locations = travel_venture_get_unique_locations();
@@ -47,21 +41,8 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                             }
                             ?>
                         </select>
-                    </div>
-
-                    <div id="location-custom-dropdown" class="absolute left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 hidden transform scale-95 opacity-0 transition-all duration-200 origin-top">
-                        <div class="p-2 space-y-0.5">
-                            <div class="location-option flex items-center px-4 py-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors" data-value="">
-                                <i class="fa-solid fa-earth-americas text-slate-400 mr-3 text-sm"></i>
-                                <span class="font-semibold text-slate-800 text-sm">Any Destination</span>
-                            </div>
-                            <?php foreach ( $unique_locations as $loc ) : ?>
-                            <div class="location-option flex items-center px-4 py-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors" data-value="<?php echo esc_attr( $loc ); ?>">
-                                <i class="fa-solid fa-location-dot text-slate-400 mr-3 text-sm"></i>
-                                <span class="font-semibold text-slate-800 text-sm"><?php echo esc_html( $loc ); ?></span>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
+                        <i class="fas fa-map-marker-alt absolute left-3.5 text-slate-400 text-sm"></i>
+                        <i class="fas fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
                     </div>
                 </div>
 
@@ -69,8 +50,8 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                 <div class="space-y-1.5">
                     <label for="check_in" class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Check In</label>
                     <div class="date-input-wrapper relative flex items-center">
-                        <input type="text" id="check_in" name="check_in" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all cursor-pointer text-slate-800 bg-white" readonly />
-                        <i class="fa-solid fa-calendar-days absolute left-3.5 text-slate-400 text-sm pointer-events-none"></i>
+                        <input type="text" id="check_in" name="check_in" class="w-full pl-4 pr-10 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all cursor-pointer text-slate-800 bg-white" readonly />
+                        <i class="fa-solid fa-calendar-days absolute right-3.5 text-slate-400 text-sm pointer-events-none"></i>
                     </div>
                 </div>
 
@@ -78,16 +59,15 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                 <div class="space-y-1.5">
                     <label for="check_out" class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Check Out</label>
                     <div class="date-input-wrapper relative flex items-center">
-                        <input type="text" id="check_out" name="check_out" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all cursor-pointer text-slate-800 bg-white" readonly />
-                        <i class="fa-solid fa-calendar-days absolute left-3.5 text-slate-400 text-sm pointer-events-none"></i>
+                        <input type="text" id="check_out" name="check_out" class="w-full pl-4 pr-10 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all cursor-pointer text-slate-800 bg-white" readonly />
+                        <i class="fa-solid fa-calendar-days absolute right-3.5 text-slate-400 text-sm pointer-events-none"></i>
                     </div>
                 </div>
 
                 <!-- Rooms & Guests selector -->
                 <div class="space-y-1.5 relative select-none">
                     <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Rooms & Guests</label>
-                    <div id="rooms-guests-trigger" class="w-full pl-10 pr-8 py-2 border border-slate-200 rounded-xl text-sm bg-white text-slate-800 flex flex-col justify-center cursor-pointer min-h-[46px] shadow-sm relative">
-                        <i class="fa-solid fa-user absolute left-3.5 text-slate-400 text-sm"></i>
+                    <div id="rooms-guests-trigger" class="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm bg-white text-slate-800 flex flex-col justify-center cursor-pointer min-h-[46px] shadow-sm relative">
                         <span id="rooms-guests-display" class="font-bold text-slate-800 text-[13px] leading-tight">1 Room, 2 Guests</span>
                         <span id="rooms-guests-subdisplay" class="text-[9px] text-slate-500 font-semibold leading-none mt-0.5">2 Adults</span>
                         <i class="fa-solid fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
