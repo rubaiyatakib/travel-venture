@@ -15,16 +15,16 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
 <!-- Hero Section -->
 <section class="relative bg-slate-900 text-white pt-24 pb-48 px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center">
     <div class="absolute inset-0 bg-cover bg-center opacity-70" style="background-image: url('<?php echo esc_url($hero_bg); ?>');"></div>
-    <div class="absolute inset-0 bg-slate-900 bg-opacity-40"></div>
+    <div class="absolute inset-0 bg-slate-900 bg-opacity-40 hero-overlay"></div>
     <div class="relative max-w-4xl mx-auto space-y-6">
         <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight font-montserrat leading-none">
-            <span style="color: #FEAA1A;">Find Your Next</span> <span style="color: #004EA1; -webkit-text-stroke: 1px #ffffff;">Luxury</span> <span style="color: #7EBCFF;">Escape</span>
+            <span style="color: #FEAA1A;">Find Your Next</span> <span class="brand-gradient-text">Luxury</span> <span style="color: #7EBCFF;">Escape</span>
         </h1>
         <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
             সেরা রেট নিশ্চিত করতে সরাসরি কক্সবাজারের শীর্ষস্থানীয় হোটেলগুলোর সাথে যোগাযোগ করে বুকিং করুন। কোনো অতিরিক্ত খরচ ছাড়াই উপভোগ করুন ফ্রি আগমনী সকালের নাস্তা এবং বিমানবন্দর বা বাস স্টেশন থেকে সরাসরি হোটেলে পৌঁছানোর ফ্রি প্রাইভেট ট্রান্সফার সুবিধা।
         </p>
         <!-- Custom Search Panel with Rooms & Guests -->
-        <div class="w-full max-w-5xl mx-auto mt-8 relative z-20">
+        <div class="w-full max-w-5xl mx-auto mt-8 relative z-20 search-form-wrapper">
             <form action="<?php echo esc_url( $hotel_archive_url ); ?>" method="GET" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end text-left" id="search-form-index">
                 
                 <!-- Destination Select -->

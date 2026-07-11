@@ -452,39 +452,150 @@ button i,
     color: #ffffff !important;
 }
 
+/* Brand Gradient Text Style */
+.brand-gradient-text {
+    background: linear-gradient(135deg, #004EA1 0%, #7EBCFF 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    display: inline-block !important;
+}
+
 /* 
  * Mobile & Tablet Optimization Media Queries
  */
 @media (max-width: 767.98px) {
-    /* Mobile font size and alignment tweaks */
+    /* Reduce hero section padding/height by 35-40% */
+    section.relative.bg-slate-900.text-white.pt-24.pb-48 {
+        padding-top: 2rem !important;
+        padding-bottom: 5.5rem !important; /* Spacing for floating card overlap */
+    }
+
+    /* Subtle dark overlay on background image to improve readability */
+    .hero-overlay {
+        background-color: rgba(15, 23, 42, 0.6) !important;
+    }
+
+    /* Heading font size decreased to 30-32px and bold */
     h1 {
-        font-size: 1.65rem !important; /* Made smaller for neatness */
-        line-height: 2.15rem !important;
+        font-size: 1.875rem !important; /* 30px */
+        font-weight: 700 !important;
+        line-height: 2.25rem !important;
         text-align: center !important;
+        letter-spacing: -0.01em !important;
     }
-    h2 {
-        font-size: 1.35rem !important; /* Made smaller for neatness */
-        line-height: 1.75rem !important;
-        text-align: center !important;
-    }
-    h3 {
-        font-size: 1.15rem !important; /* Made smaller for neatness */
-        line-height: 1.5rem !important;
-    }
-    
-    /* Make body and paragraph text slightly smaller and neatly aligned on mobile */
-    p, .text-slate-500, .text-slate-600 {
+
+    /* Reduce paragraph width and increase line-height/readability */
+    p.text-slate-300 {
+        max-width: 88% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
         font-size: 0.85rem !important;
-        line-height: 1.4rem !important;
+        line-height: 1.5rem !important;
+        color: #cbd5e1 !important;
+    }
+
+    /* Make the booking card float over background with 20px border radius & soft shadow */
+    .search-form-wrapper {
+        margin-top: 1.5rem !important;
+        margin-bottom: -4.5rem !important; /* Overlap/float look */
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    #search-form-index {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* 2 equal columns */
+        grid-gap: 16px !important; /* Airbnb-style equal spacing gap */
+        padding: 20px !important;
+        border-radius: 20px !important; /* 20px border radius */
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important; /* Soft premium shadow */
+        background-color: #ffffff !important;
+        border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    }
+
+    #search-form-index > div:nth-child(1) {
+        grid-column: span 2 !important; /* Destination full width */
+    }
+
+    #search-form-index > div:nth-child(2) {
+        grid-column: span 1 !important; /* Check-in 1 col */
+    }
+
+    #search-form-index > div:nth-child(3) {
+        grid-column: span 1 !important; /* Check-out 1 col */
+    }
+
+    #search-form-index > div:nth-child(4) {
+        grid-column: span 2 !important; /* Rooms/Guests full width below them */
+    }
+
+    #search-form-index > div:nth-child(5) {
+        grid-column: span 2 !important; /* Button full width */
+        margin-top: 8px !important;
+    }
+
+    /* Reduce internal padding of input fields */
+    #search-form-index input,
+    #search-form-index select,
+    #rooms-guests-trigger {
+        font-size: 13px !important;
+        padding: 8px 12px !important; /* Reduced internal padding */
+        height: 42px !important;
+        min-height: 42px !important;
+        border-radius: 10px !important;
+        border: 1px solid #e2e8f0 !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    /* Smooth hover/tap animation and outline focus effects */
+    #search-form-index input:focus,
+    #search-form-index select:focus,
+    #rooms-guests-trigger:active,
+    #rooms-guests-trigger:focus {
+        border-color: #0c4ea3 !important;
+        box-shadow: 0 0 0 3px rgba(12, 78, 163, 0.15) !important;
+        transform: scale(0.99) !important;
+    }
+
+    #rooms-guests-trigger span#rooms-guests-display {
+        font-size: 13px !important;
+    }
+    #rooms-guests-trigger span#rooms-guests-subdisplay {
+        font-size: 9px !important;
+    }
+
+    /* Search button styling: 54px height, blue gradient, larger icon, rounded corners */
+    #search-form-index button[type="submit"] {
+        height: 54px !important; /* 52-56px height */
+        min-height: 54px !important;
+        background: linear-gradient(135deg, #004EA1 0%, #7EBCFF 100%) !important; /* Modern blue gradient */
+        border-radius: 12px !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s ease-in-out !important;
+        border: none !important;
+    }
+
+    #search-form-index button[type="submit"]:active {
+        transform: scale(0.97) !important;
+        opacity: 0.95 !important;
+    }
+
+    #search-form-index button[type="submit"] i {
+        font-size: 16px !important; /* Larger icon */
+        margin-right: 8px !important;
     }
     
-    /* Neatly center section descriptions */
+    /* Neatly center descriptions */
     .text-center p {
         text-align: center !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
     }
-    
+
     /* Adjust grid items padding and alignment on mobile for professional look */
     .grid > div {
         padding: 1.5rem !important;
@@ -503,6 +614,23 @@ button i,
         width: 100% !important;
     }
 
+    /* Mobile font size and alignment tweaks */
+    h2 {
+        font-size: 1.35rem !important; /* Made smaller for neatness */
+        line-height: 1.75rem !important;
+        text-align: center !important;
+    }
+    h3 {
+        font-size: 1.15rem !important; /* Made smaller for neatness */
+        line-height: 1.5rem !important;
+    }
+    
+    /* Make body and paragraph text slightly smaller and neatly aligned on mobile */
+    p, .text-slate-500, .text-slate-600 {
+        font-size: 0.85rem !important;
+        line-height: 1.4rem !important;
+    }
+
     /* Compress tall vertical padding blocks for tight mobile layouts */
     .py-16 {
         padding-top: 2rem !important;
@@ -514,77 +642,6 @@ button i,
     }
     .pb-48 {
         padding-bottom: 4rem !important;
-    }
-    section.pt-24.pb-48 {
-        padding-top: 3rem !important;
-        padding-bottom: 4rem !important;
-    }
-
-    /* Professional Mobile Search Form Grid Layout (Premium Booking.com-style compact 2-column dashboard) */
-    #search-form-index {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important; /* 2-column layout */
-        grid-gap: 10px !important;
-        padding: 16px !important;
-        border-radius: 20px !important;
-        box-shadow: 0 12px 36px rgba(15, 23, 42, 0.1) !important;
-        background-color: #ffffff !important;
-        border: 1px solid rgba(226, 232, 240, 0.8) !important;
-    }
-
-    #search-form-index > div:nth-child(1) {
-        grid-column: span 2 !important; /* Destination takes full width */
-    }
-
-    #search-form-index > div:nth-child(2) {
-        grid-column: span 1 !important; /* Check-in takes half width */
-    }
-
-    #search-form-index > div:nth-child(3) {
-        grid-column: span 1 !important; /* Check-out takes half width */
-    }
-
-    #search-form-index > div:nth-child(4) {
-        grid-column: span 2 !important; /* Rooms/Guests takes full width */
-    }
-
-    #search-form-index > div:nth-child(5) {
-        grid-column: span 2 !important; /* Button takes full width */
-        margin-top: 4px !important;
-    }
-
-    /* Polish labels and inputs on mobile */
-    #search-form-index label {
-        font-size: 10px !important;
-        letter-spacing: 0.05em !important;
-        margin-bottom: 4px !important;
-    }
-
-    #search-form-index input,
-    #search-form-index select,
-    #rooms-guests-trigger {
-        font-size: 12px !important;
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-        height: 42px !important;
-        min-height: 42px !important;
-        border-radius: 10px !important;
-    }
-    
-    #rooms-guests-trigger span#rooms-guests-display {
-        font-size: 12px !important;
-    }
-    
-    #rooms-guests-trigger span#rooms-guests-subdisplay {
-        font-size: 9px !important;
-    }
-
-    #search-form-index button[type="submit"] {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-        height: 44px !important;
-        border-radius: 10px !important;
-        font-size: 13px !important;
     }
 
     .glassmorphism {
