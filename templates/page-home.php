@@ -18,7 +18,7 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
     <div class="absolute inset-0 bg-slate-900 bg-opacity-40"></div>
     <div class="relative max-w-4xl mx-auto space-y-6">
         <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight font-montserrat leading-none">
-            <span style="color: #FEAA1A;">Find Your Next</span> <span style="color: #004EA1;">Luxury</span> <span style="color: #7EBCFF;">Escape</span>
+            <span style="color: #FEAA1A;">Find Your Next</span> <span style="color: #004EA1; -webkit-text-stroke: 1px #ffffff;">Luxury</span> <span style="color: #7EBCFF;">Escape</span>
         </h1>
         <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
             সেরা রেট নিশ্চিত করতে সরাসরি কক্সবাজারের শীর্ষস্থানীয় হোটেলগুলোর সাথে যোগাযোগ করে বুকিং করুন। কোনো অতিরিক্ত খরচ ছাড়াই উপভোগ করুন ফ্রি আগমনী সকালের নাস্তা এবং বিমানবন্দর বা বাস স্টেশন থেকে সরাসরি হোটেলে পৌঁছানোর ফ্রি প্রাইভেট ট্রান্সফার সুবিধা।
