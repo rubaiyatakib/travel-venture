@@ -1017,10 +1017,164 @@ function initRoomsGuestsSelector() {
     renderRooms();
 }
 
+function initCustomLocationDropdown() {
+    const trigger = document.getElementById('location-trigger');
+    const dropdown = document.getElementById('location-custom-dropdown');
+    const display = document.getElementById('location-display');
+    const nativeSelect = document.getElementById('location');
+    const container = document.getElementById('location-options-container');
+    const chevron = trigger ? trigger.querySelector('.fa-chevron-down') : null;
+    
+    if (!trigger || !dropdown || !nativeSelect || !container) return;
+    
+    // Clear and build the dynamic options list from the native select
+    container.innerHTML = '';
+    const options = nativeSelect.options;
+    
+    Array.from(options).forEach((option) => {
+        const value = option.value;
+        const text = option.text;
+        
+        const optionBtn = document.createElement('button');
+        optionBtn.type = 'button';
+        optionBtn.role = 'option';
+        optionBtn.className = 'w-full text-left px-4 py-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors text-sm font-semibold text-slate-800 flex items-center border-none bg-transparent';
+        optionBtn.setAttribute('data-value', value);
+        optionBtn.setAttribute('aria-selected', option.selected ? 'true' : 'false');
+        
+        // Icon matching
+        const icon = document.createElement('i');
+        if (value === '') {
+            icon.className = 'fa-solid fa-earth-americas text-slate-400 mr-3 text-sm';
+        } else {
+            icon.className = 'fa-solid fa-location-dot text-slate-400 mr-3 text-sm';
+        }
+        
+        const span = document.createElement('span');
+        span.textContent = text;
+        
+        optionBtn.appendChild(icon);
+        optionBtn.appendChild(span);
+        container.appendChild(optionBtn);
+        
+        // Set initial selected display
+        if (option.selected) {
+            display.textContent = text;
+            optionBtn.setAttribute('aria-selected', 'true');
+            optionBtn.classList.add('bg-blue-50/50', 'text-blue-700');
+        }
+        
+        // Add click listener
+        optionBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Sync with native select
+            nativeSelect.value = value;
+            nativeSelect.dispatchEvent(new Event('input', { bubbles: true }));
+            nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            
+            // If jQuery exists, trigger it as well
+            if (typeof jQuery !== 'undefined') {
+                jQuery(nativeSelect).trigger('change');
+            }
+            
+            // Update UI trigger display
+            display.textContent = text;
+            
+            // Reset all options selected state
+            container.querySelectorAll('[role="option"]').forEach(btn => {
+                btn.setAttribute('aria-selected', 'false');
+                btn.classList.remove('bg-blue-50/50', 'text-blue-700');
+            });
+            
+            optionBtn.setAttribute('aria-selected', 'true');
+            optionBtn.classList.add('bg-blue-50/50', 'text-blue-700');
+            
+            closeDropdown();
+            trigger.focus();
+        });
+    });
+    
+    // Toggle dropdown open/close with animation
+    trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (dropdown.classList.contains('hidden')) {
+            openDropdown();
+        } else {
+            closeDropdown();
+        }
+    });
+    
+    function openDropdown() {
+        dropdown.classList.remove('hidden');
+        // Force a reflow/repaint to trigger CSS transition
+        dropdown.offsetHeight;
+        dropdown.classList.remove('scale-95', 'opacity-0');
+        dropdown.classList.add('scale-100', 'opacity-100');
+        trigger.setAttribute('aria-expanded', 'true');
+        trigger.classList.add('border-primary-color');
+        if (chevron) chevron.classList.add('rotate-180');
+    }
+    
+    function closeDropdown() {
+        dropdown.classList.remove('scale-100', 'opacity-100');
+        dropdown.classList.add('scale-95', 'opacity-0');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.classList.remove('border-primary-color');
+        if (chevron) chevron.classList.remove('rotate-180');
+        
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+            if (dropdown.classList.contains('opacity-0')) {
+                dropdown.classList.add('hidden');
+            }
+        }, 200);
+    }
+    
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+    
+    // Keyboard navigation
+    trigger.addEventListener('keydown', function(e) {
+        const optionBtns = Array.from(container.querySelectorAll('[role="option"]'));
+        if (optionBtns.length === 0) return;
+        
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            openDropdown();
+            optionBtns[0].focus();
+        }
+    });
+    
+    container.addEventListener('keydown', function(e) {
+        const optionBtns = Array.from(container.querySelectorAll('[role="option"]'));
+        const activeIndex = optionBtns.indexOf(document.activeElement);
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextIndex = (activeIndex + 1) % optionBtns.length;
+            optionBtns[nextIndex].focus();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevIndex = (activeIndex - 1 + optionBtns.length) % optionBtns.length;
+            optionBtns[prevIndex].focus();
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            closeDropdown();
+            trigger.focus();
+        }
+    });
+}
+
 // Auto-run controllers based on route markers
 document.addEventListener('DOMContentLoaded', function() {
     initExplorer();
     initDetails();
     initFlatpickr();
     initRoomsGuestsSelector();
+    initCustomLocationDropdown();
 });

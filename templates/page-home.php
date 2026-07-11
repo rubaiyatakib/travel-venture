@@ -28,11 +28,19 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
     <div class="w-full max-w-5xl mx-auto mt-8 relative z-20 search-form-wrapper">
         <form action="<?php echo esc_url( $hotel_archive_url ); ?>" method="GET" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end text-left" id="search-form-index">
                 
-                <!-- Destination Select -->
-                <div class="space-y-1.5">
+                <!-- Destination Select (Custom Dropdown) -->
+                <div class="space-y-1.5 tripazai-hero-booking">
                     <label for="location" class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Destination</label>
-                    <div class="relative flex items-center">
-                        <select id="location" name="location" class="w-full pl-10 pr-8 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all appearance-none bg-white text-slate-800">
+                    <div class="tripazai-destination-dropdown relative select-none">
+                        <!-- Custom Trigger Button acting as the input -->
+                        <button type="button" id="location-trigger" class="w-full pl-10 pr-8 py-3 rounded-xl border border-slate-200 text-sm bg-white text-slate-800 cursor-pointer min-h-[46px] flex items-center shadow-sm relative text-left" aria-haspopup="listbox" aria-expanded="false" aria-controls="location-custom-dropdown">
+                            <span id="location-display" class="font-semibold text-slate-800">Any Destination</span>
+                            <i class="fas fa-map-marker-alt absolute left-3.5 text-slate-400 text-sm"></i>
+                            <i class="fas fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none transition-transform duration-200"></i>
+                        </button>
+                        
+                        <!-- Hidden native select for form submission and query parameters -->
+                        <select id="location" name="location" class="sr-only" tabindex="-1">
                             <option value="">Any Destination</option>
                             <?php
                             $unique_locations = travel_venture_get_unique_locations();
@@ -42,8 +50,13 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                             }
                             ?>
                         </select>
-                        <i class="fas fa-map-marker-alt absolute left-3.5 text-slate-400 text-sm"></i>
-                        <i class="fas fa-chevron-down absolute right-3.5 text-slate-400 text-xs pointer-events-none"></i>
+
+                        <!-- Custom Dropdown Menu -->
+                        <div id="location-custom-dropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 transform scale-95 opacity-0 transition-all duration-200 origin-top max-h-60 overflow-y-auto" role="listbox">
+                            <div class="p-2 space-y-0.5" id="location-options-container">
+                                <!-- Options are generated dynamically from the select in JS -->
+                            </div>
+                        </div>
                     </div>
                 </div>
 

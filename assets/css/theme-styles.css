@@ -566,7 +566,8 @@ button i,
     /* Standardized input boxes: height 50px, border-radius 10px, clean border */
     #search-form-index input,
     #search-form-index select,
-    #rooms-guests-trigger {
+    #rooms-guests-trigger,
+    #location-trigger {
         font-size: 14px !important;
         font-weight: 500 !important;
         color: #0f172a !important;
@@ -625,7 +626,9 @@ button i,
     #search-form-index input:focus,
     #search-form-index select:focus,
     #rooms-guests-trigger:focus,
-    #rooms-guests-trigger:active {
+    #rooms-guests-trigger:active,
+    #location-trigger:focus,
+    #location-trigger:active {
         outline: none !important;
         border-color: #0c4ea3 !important;
         box-shadow: 0 0 0 3px rgba(12, 78, 163, 0.15) !important;
@@ -798,4 +801,36 @@ button i,
     background-color: #e59512 !important;
     background-image: none !important;
     color: #020617 !important;
+}
+
+/* Custom Destination Dropdown Animation styles */
+#location-custom-dropdown {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+#location-custom-dropdown.scale-95.opacity-0 {
+    transform: scale(0.95) translateY(-8px) !important;
+    opacity: 0 !important;
+}
+#location-custom-dropdown.scale-100.opacity-100 {
+    transform: scale(1) translateY(0) !important;
+    opacity: 1 !important;
+}
+
+/* Hide native select accessibility-safely */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Custom Location trigger focus border highlight */
+#location-trigger.border-primary-color {
+    border-color: #0c4ea3 !important;
+    box-shadow: 0 0 0 3px rgba(12, 78, 163, 0.15) !important;
 }
