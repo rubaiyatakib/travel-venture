@@ -90,7 +90,7 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                         <input type="hidden" id="hidden-guests-count" name="guests" value="2" />
                         
                         <!-- Dropdown Popup Card -->
-                        <div id="rooms-guests-popup" class="hidden absolute top-full left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-0 mt-3 w-[calc(100vw-32px)] sm:w-80 bg-white rounded-2xl border border-slate-200 shadow-2xl p-5 z-50 text-left space-y-4">
+                        <div id="rooms-guests-popup" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-0 mb-3 w-[calc(100vw-32px)] sm:w-80 bg-white rounded-2xl border border-slate-200 shadow-2xl p-5 z-50 text-left space-y-4">
                             <div id="rooms-list-container" class="space-y-4 max-h-60 overflow-y-auto pr-1">
                                 <!-- Dynamic room items rendered by JS -->
                             </div>
