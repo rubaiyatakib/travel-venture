@@ -998,3 +998,19 @@ button i,
         overflow-wrap: break-word !important;
     }
 }
+
+/* UI/UX Layering Fix: Ensure active dropdowns float on top of neighboring fields */
+.search-form-wrapper .z-40,
+.search-form-wrapper div:has(#rooms-guests-popup:not(.hidden)),
+.search-form-wrapper div:has(#location-custom-dropdown:not(.hidden)) {
+    position: relative !important;
+    z-index: 50 !important;
+}
+
+#search-form-index,
+.search-form-wrapper,
+.search-form-wrapper div,
+#rooms-guests-trigger {
+    overflow: visible !important;
+}
+
