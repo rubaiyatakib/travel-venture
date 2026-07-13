@@ -1014,3 +1014,34 @@ button i,
     overflow: visible !important;
 }
 
+/* Mobile-specific compact form layout overrides (< 1024px) */
+@media (max-width: 1023px) {
+    #search-form-index {
+        gap: 12px !important; /* Reduces vertical gap between row elements */
+        padding: 20px 16px !important; /* Thinner padding on mobile screens */
+    }
+
+    #search-form-index > div {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Reduce vertical heights and padding of inputs, select dropdown triggers, and buttons slightly */
+    #search-form-index input,
+    #search-form-index select,
+    #rooms-guests-trigger,
+    #location-trigger,
+    #search-form-index button[type="submit"] {
+        height: 48px !important;
+        min-height: 48px !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+
+    /* Tighten label to input gaps */
+    #search-form-index label {
+        margin-bottom: 4px !important;
+    }
+}
+
+
