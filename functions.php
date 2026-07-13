@@ -19,6 +19,10 @@ require_once get_template_directory() . '/includes/hotel-media.php';
 require_once get_template_directory() . '/admin/add-hotel.php';
 require_once get_template_directory() . '/admin/save-hotel.php';
 
+// Load Google Maps Importer Integration
+require_once get_template_directory() . '/includes/class-google-maps-importer.php';
+
+
 /**
  * Filter redirect logic to load templates/page-*.php from templates subdirectory
  */
