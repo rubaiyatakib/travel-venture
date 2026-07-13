@@ -855,6 +855,8 @@ function initRoomsGuestsSelector() {
         { id: 1, adults: 2, children: 0 }
     ];
     
+    const parentContainer = trigger.closest('.relative');
+    
     // Toggle popup open/close
     trigger.addEventListener('click', function(e) {
         if (e.target.closest('#rooms-guests-popup')) return;
@@ -869,6 +871,11 @@ function initRoomsGuestsSelector() {
             if (destTrigger) {
                 destTrigger.setAttribute('aria-expanded', 'false');
                 destTrigger.classList.remove('border-primary-color');
+                const destParent = destTrigger.closest('.tripazai-destination-dropdown');
+                if (destParent) {
+                    destParent.classList.remove('z-40');
+                    destParent.classList.add('z-30');
+                }
             }
             if (destChevron) destChevron.classList.remove('rotate-180');
             setTimeout(() => {
@@ -879,6 +886,13 @@ function initRoomsGuestsSelector() {
         }
 
         popup.classList.toggle('hidden');
+        if (!popup.classList.contains('hidden')) {
+            parentContainer.classList.remove('z-20');
+            parentContainer.classList.add('z-40');
+        } else {
+            parentContainer.classList.remove('z-40');
+            parentContainer.classList.add('z-20');
+        }
     });
     
     // Close popup on Done click
@@ -886,6 +900,8 @@ function initRoomsGuestsSelector() {
         doneBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             popup.classList.add('hidden');
+            parentContainer.classList.remove('z-40');
+            parentContainer.classList.add('z-20');
         });
     }
     
@@ -893,6 +909,8 @@ function initRoomsGuestsSelector() {
     document.addEventListener('click', function(e) {
         if (!trigger.contains(e.target)) {
             popup.classList.add('hidden');
+            parentContainer.classList.remove('z-40');
+            parentContainer.classList.add('z-20');
         }
     });
     
@@ -1106,6 +1124,8 @@ function initCustomLocationDropdown() {
         });
     });
     
+    const parentContainer = trigger.closest('.tripazai-destination-dropdown');
+
     // Toggle dropdown open/close with animation
     trigger.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -1119,7 +1139,17 @@ function initCustomLocationDropdown() {
     function openDropdown() {
         // Close Rooms & Guests popup if open
         const roomsPopup = document.getElementById('rooms-guests-popup');
-        if (roomsPopup) roomsPopup.classList.add('hidden');
+        const roomsTrigger = document.getElementById('rooms-guests-trigger');
+        if (roomsPopup) {
+            roomsPopup.classList.add('hidden');
+            if (roomsTrigger) {
+                const roomsParent = roomsTrigger.closest('.relative');
+                if (roomsParent) {
+                    roomsParent.classList.remove('z-40');
+                    roomsParent.classList.add('z-20');
+                }
+            }
+        }
 
         dropdown.classList.remove('hidden');
         // Force a reflow/repaint to trigger CSS transition
@@ -1129,6 +1159,11 @@ function initCustomLocationDropdown() {
         trigger.setAttribute('aria-expanded', 'true');
         trigger.classList.add('border-primary-color');
         if (chevron) chevron.classList.add('rotate-180');
+        
+        if (parentContainer) {
+            parentContainer.classList.remove('z-30');
+            parentContainer.classList.add('z-40');
+        }
     }
     
     function closeDropdown() {
@@ -1137,6 +1172,11 @@ function initCustomLocationDropdown() {
         trigger.setAttribute('aria-expanded', 'false');
         trigger.classList.remove('border-primary-color');
         if (chevron) chevron.classList.remove('rotate-180');
+        
+        if (parentContainer) {
+            parentContainer.classList.remove('z-40');
+            parentContainer.classList.add('z-30');
+        }
         
         // Wait for animation to finish before hiding
         setTimeout(() => {
