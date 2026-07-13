@@ -23,6 +23,8 @@ require_once get_template_directory() . '/admin/save-hotel.php';
 require_once get_template_directory() . '/includes/class-google-maps-importer.php';
 
 
+
+
 /**
  * Filter redirect logic to load templates/page-*.php from templates subdirectory
  */

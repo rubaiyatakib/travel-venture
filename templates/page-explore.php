@@ -149,7 +149,7 @@ $currency_symbol = esc_html( get_theme_mod( 'currency_symbol', '৳' ) );
                         $detail_url = get_permalink();
                         ?>
                         <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 flex flex-col h-full group">
-                            <div class="relative overflow-hidden aspect-w-16 h-60">
+                            <div class="relative overflow-hidden w-full h-60">
                                 <?php
                                 $img_url = get_post_meta( $id, '_hotel_image_featured_url', true );
                                 if ( empty( $img_url ) ) {

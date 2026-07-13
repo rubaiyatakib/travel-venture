@@ -31,7 +31,7 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                 <!-- Destination Select (Custom Dropdown) -->
                 <div class="space-y-1.5 tripazai-hero-booking">
                     <label for="location" class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Destination</label>
-                    <div class="tripazai-destination-dropdown relative select-none">
+                    <div class="tripazai-destination-dropdown relative select-none z-30">
                         <!-- Custom Trigger Button acting as the input -->
                         <button type="button" id="location-trigger" class="w-full pl-10 pr-8 py-3 rounded-xl border border-slate-200 text-sm bg-white text-slate-800 cursor-pointer min-h-[46px] flex items-center shadow-sm relative text-left" aria-haspopup="listbox" aria-expanded="false" aria-controls="location-custom-dropdown">
                             <span id="location-display" class="font-semibold text-slate-800">Any Destination</span>
@@ -79,7 +79,7 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                 </div>
 
                 <!-- Rooms & Guests selector -->
-                <div class="space-y-1.5 relative select-none">
+                <div class="space-y-1.5 relative select-none z-20">
                     <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Rooms & Guests</label>
                     <div id="rooms-guests-trigger" class="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm bg-white text-slate-800 flex flex-col justify-center cursor-pointer min-h-[46px] shadow-sm relative">
                         <span id="rooms-guests-display" class="font-bold text-slate-800 text-[13px] leading-tight">1 Room, 2 Guests</span>
@@ -198,7 +198,7 @@ $hotel_archive_url = get_post_type_archive_link( 'hotel' ) ? get_post_type_archi
                     $detail_url = get_permalink();
                     ?>
                     <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 flex flex-col h-full group">
-                        <div class="relative overflow-hidden aspect-w-16 h-64">
+                        <div class="relative overflow-hidden w-full h-64">
                             <?php
                             $img_url = get_post_meta( $id, '_hotel_image_featured_url', true );
                             if ( empty( $img_url ) ) {
